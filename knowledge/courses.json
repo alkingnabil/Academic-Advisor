@@ -1,0 +1,1312 @@
+[
+ {
+  "code": "MA111",
+  "nameAr": "رياضيات ١",
+  "nameEn": "Math I",
+  "hours": 3,
+  "prereqs": [],
+  "minHours": null,
+  "dept": "عام"
+ },
+ {
+  "code": "EE101",
+  "nameAr": "إلكترونيات",
+  "nameEn": "Electronics",
+  "hours": 3,
+  "prereqs": [],
+  "minHours": null,
+  "dept": "عام"
+ },
+ {
+  "code": "MA112",
+  "nameAr": "هياكل متقطعة",
+  "nameEn": "Discrete Structures",
+  "hours": 3,
+  "prereqs": [],
+  "minHours": null,
+  "dept": "عام"
+ },
+ {
+  "code": "MA113",
+  "nameAr": "رياضيات ٢",
+  "nameEn": "Math II",
+  "hours": 3,
+  "prereqs": [
+   "MA111"
+  ],
+  "minHours": null,
+  "dept": "عام"
+ },
+ {
+  "code": "MA121",
+  "nameAr": "احتمالات وإحصاء ١",
+  "nameEn": "Probability & Statistics I",
+  "hours": 3,
+  "prereqs": [
+   "MA111"
+  ],
+  "minHours": null,
+  "dept": "عام"
+ },
+ {
+  "code": "CS121",
+  "nameAr": "أساسيات علوم الحاسب",
+  "nameEn": "CS Fundamentals",
+  "hours": 3,
+  "prereqs": [],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "CS141",
+  "nameAr": "أساسيات البرمجة",
+  "nameEn": "Programming Fundamentals",
+  "hours": 3,
+  "prereqs": [],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "MA222",
+  "nameAr": "احتمالات وإحصاء ٢",
+  "nameEn": "Probability & Statistics II",
+  "hours": 3,
+  "prereqs": [
+   "MA121"
+  ],
+  "minHours": null,
+  "dept": "عام"
+ },
+ {
+  "code": "PH201",
+  "nameAr": "فيزياء",
+  "nameEn": "Physics",
+  "hours": 3,
+  "prereqs": [],
+  "minHours": null,
+  "dept": "عام"
+ },
+ {
+  "code": "EE201",
+  "nameAr": "تصميم منطقي",
+  "nameEn": "Logic Design",
+  "hours": 3,
+  "prereqs": [
+   "EE101"
+  ],
+  "minHours": null,
+  "dept": "عام"
+ },
+ {
+  "code": "IS211",
+  "nameAr": "قواعد البيانات",
+  "nameEn": "Database",
+  "hours": 3,
+  "prereqs": [],
+  "minHours": null,
+  "dept": "IS"
+ },
+ {
+  "code": "IS212",
+  "nameAr": "تكنولوجيا الويب",
+  "nameEn": "Web Technology",
+  "hours": 3,
+  "prereqs": [
+   "CS241"
+  ],
+  "minHours": null,
+  "dept": "IS"
+ },
+ {
+  "code": "IS221",
+  "nameAr": "إدارة المشروعات",
+  "nameEn": "Project Management",
+  "hours": 3,
+  "prereqs": [
+   "CS121"
+  ],
+  "minHours": null,
+  "dept": "IS"
+ },
+ {
+  "code": "CS211",
+  "nameAr": "هياكل البيانات ١",
+  "nameEn": "Data Structures I",
+  "hours": 3,
+  "prereqs": [
+   "CS241"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "CS241",
+  "nameAr": "البرمجة الشيئية",
+  "nameEn": "Object-Oriented Programming",
+  "hours": 3,
+  "prereqs": [
+   "CS141"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "CS242",
+  "nameAr": "البرمجة المتوازية",
+  "nameEn": "Parallel Programming",
+  "hours": 3,
+  "prereqs": [
+   "CS241"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "CS291",
+  "nameAr": "النمذجة والمحاكاة",
+  "nameEn": "Modeling & Simulation",
+  "hours": 3,
+  "prereqs": [
+   "CS141"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "IT231",
+  "nameAr": "شبكات الحاسب ١",
+  "nameEn": "Computer Networks I",
+  "hours": 3,
+  "prereqs": [
+   "CS121"
+  ],
+  "minHours": null,
+  "dept": "IT"
+ },
+ {
+  "code": "MA231",
+  "nameAr": "بحوث العمليات",
+  "nameEn": "Operations Research",
+  "hours": 3,
+  "prereqs": [
+   "MA113"
+  ],
+  "minHours": null,
+  "dept": "عام"
+ },
+ {
+  "code": "CS311",
+  "nameAr": "تحليل وتصميم الخوارزميات",
+  "nameEn": "Algorithms Analysis & Design",
+  "hours": 3,
+  "prereqs": [
+   "CS211"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "CS321",
+  "nameAr": "نظم التشغيل ١",
+  "nameEn": "Operating Systems I",
+  "hours": 3,
+  "prereqs": [
+   "CS121"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "TR301",
+  "nameAr": "التدريب الميداني",
+  "nameEn": "Field Training",
+  "hours": 3,
+  "prereqs": [],
+  "minHours": 72,
+  "dept": "عام"
+ },
+ {
+  "code": "CS312",
+  "nameAr": "هياكل البيانات ٢",
+  "nameEn": "Data Structures II",
+  "hours": 3,
+  "prereqs": [
+   "CS211"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "CS341",
+  "nameAr": "مفاهيم لغات البرمجة",
+  "nameEn": "Concepts of Prog. Languages",
+  "hours": 3,
+  "prereqs": [
+   "CS312"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "CS322",
+  "nameAr": "بنية وتنظيم الحاسبات",
+  "nameEn": "Computer Architecture",
+  "hours": 3,
+  "prereqs": [
+   "EE201"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "CS351",
+  "nameAr": "الرسم بالحاسب ١",
+  "nameEn": "Computer Graphics I",
+  "hours": 3,
+  "prereqs": [
+   "MA113"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "CS352",
+  "nameAr": "معالجة الصور",
+  "nameEn": "Image Processing",
+  "hours": 3,
+  "prereqs": [
+   "CS241"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "CS391",
+  "nameAr": "هندسة البرمجيات",
+  "nameEn": "Software Engineering",
+  "hours": 3,
+  "prereqs": [],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "AI301",
+  "nameAr": "الذكاء الاصطناعي",
+  "nameEn": "Artificial Intelligence",
+  "hours": 3,
+  "prereqs": [
+   "CS211"
+  ],
+  "minHours": null,
+  "dept": "AI"
+ },
+ {
+  "code": "CS331",
+  "nameAr": "البرمجة المرئية",
+  "nameEn": "Visual Programming",
+  "hours": 3,
+  "prereqs": [
+   "CS211"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "IT302",
+  "nameAr": "التشفير",
+  "nameEn": "Cryptography",
+  "hours": 3,
+  "prereqs": [
+   "MA113"
+  ],
+  "minHours": null,
+  "dept": "IT"
+ },
+ {
+  "code": "CS441",
+  "nameAr": "المترجمات",
+  "nameEn": "Compiler Construction",
+  "hours": 3,
+  "prereqs": [
+   "CS322"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "CS401",
+  "nameAr": "نظرية الحسابات",
+  "nameEn": "Computation Theory",
+  "hours": 3,
+  "prereqs": [
+   "MA112"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "AI413",
+  "nameAr": "تعلّم الآلة",
+  "nameEn": "Machine Learning",
+  "hours": 3,
+  "prereqs": [
+   "MA113",
+   "MA222"
+  ],
+  "minHours": null,
+  "dept": "AI"
+ },
+ {
+  "code": "CS453",
+  "nameAr": "الرؤية بالحاسب",
+  "nameEn": "Computer Vision",
+  "hours": 3,
+  "prereqs": [
+   "CS351",
+   "CS352"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "CS491",
+  "nameAr": "الحوسبة السحابية",
+  "nameEn": "Cloud Computing",
+  "hours": 3,
+  "prereqs": [
+   "CS321"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "CS421",
+  "nameAr": "نظم التشغيل ٢",
+  "nameEn": "Operating Systems II",
+  "hours": 3,
+  "prereqs": [
+   "CS321"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "CS442",
+  "nameAr": "برمجة النظم المدمجة",
+  "nameEn": "Embedded Systems Prog.",
+  "hours": 3,
+  "prereqs": [
+   "CS322",
+   "CS241"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "CS431",
+  "nameAr": "تحليل البيانات الضخمة",
+  "nameEn": "Big Data Analysis",
+  "hours": 3,
+  "prereqs": [
+   "IS211"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "CS411",
+  "nameAr": "نظم المعلومات الحيوية",
+  "nameEn": "Bioinformatics Systems",
+  "hours": 3,
+  "prereqs": [
+   "CS311"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "CS443",
+  "nameAr": "برمجة المحمول",
+  "nameEn": "Mobile Programming",
+  "hours": 3,
+  "prereqs": [
+   "CS321"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "CS492",
+  "nameAr": "اختبار البرمجيات وضمان الجودة",
+  "nameEn": "Software Testing & QA",
+  "hours": 3,
+  "prereqs": [
+   "CS391",
+   "CS311"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "CS471",
+  "nameAr": "أمن البرمجيات",
+  "nameEn": "Software Security",
+  "hours": 3,
+  "prereqs": [
+   "CS311",
+   "CS391"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "CS451",
+  "nameAr": "تفاعل الإنسان والآلة",
+  "nameEn": "Human-Computer Interaction",
+  "hours": 3,
+  "prereqs": [
+   "CS391",
+   "CS311"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "CS493",
+  "nameAr": "تصميم وعمارة البرمجيات",
+  "nameEn": "Software Design & Architecture",
+  "hours": 3,
+  "prereqs": [
+   "CS311",
+   "CS391"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "AI401",
+  "nameAr": "معالجة اللغات الطبيعية",
+  "nameEn": "Natural Language Processing",
+  "hours": 3,
+  "prereqs": [
+   "CS311"
+  ],
+  "minHours": null,
+  "dept": "AI"
+ },
+ {
+  "code": "AI421",
+  "nameAr": "الويب الدلالي والأنطولوجي",
+  "nameEn": "Semantic Web & Ontology",
+  "hours": 3,
+  "prereqs": [
+   "IS212",
+   "AI301"
+  ],
+  "minHours": null,
+  "dept": "AI"
+ },
+ {
+  "code": "AI435",
+  "nameAr": "الحوسبة الضبابية",
+  "nameEn": "Fuzzy Computing",
+  "hours": 3,
+  "prereqs": [
+   "MA121",
+   "MA113"
+  ],
+  "minHours": null,
+  "dept": "AI"
+ },
+ {
+  "code": "CS464",
+  "nameAr": "اكتشاف المعرفة",
+  "nameEn": "Knowledge Discovery",
+  "hours": 3,
+  "prereqs": [
+   "IS211",
+   "AI301"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "CS473",
+  "nameAr": "البرمجة الموزعة والمتزامنة",
+  "nameEn": "Concurrent & Distributed Prog.",
+  "hours": 3,
+  "prereqs": [
+   "CS331"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "CS413",
+  "nameAr": "الحوسبة عالية الأداء",
+  "nameEn": "High Performance Computing",
+  "hours": 3,
+  "prereqs": [
+   "CS242"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "CS481",
+  "nameAr": "مشروع التخرج",
+  "nameEn": "Graduation Project",
+  "hours": 6,
+  "prereqs": [],
+  "minHours": 108,
+  "dept": "CS"
+ },
+ {
+  "code": "IT301",
+  "nameAr": "المتحكمات الدقيقة",
+  "nameEn": "Micro Controllers",
+  "hours": 3,
+  "prereqs": [
+   "EE201"
+  ],
+  "minHours": null,
+  "dept": "IT"
+ },
+ {
+  "code": "IT331",
+  "nameAr": "شبكات الحاسب ٢",
+  "nameEn": "Computer Networks II",
+  "hours": 3,
+  "prereqs": [
+   "IT231"
+  ],
+  "minHours": null,
+  "dept": "IT"
+ },
+ {
+  "code": "IT332",
+  "nameAr": "تراسل البيانات",
+  "nameEn": "Data Communication",
+  "hours": 3,
+  "prereqs": [
+   "MA113"
+  ],
+  "minHours": null,
+  "dept": "IT"
+ },
+ {
+  "code": "IT341",
+  "nameAr": "إشارات ونظم",
+  "nameEn": "Signals & Systems",
+  "hours": 3,
+  "prereqs": [],
+  "minHours": null,
+  "dept": "IT"
+ },
+ {
+  "code": "IT342",
+  "nameAr": "معالجة الإشارات الرقمية",
+  "nameEn": "Digital Signal Processing",
+  "hours": 3,
+  "prereqs": [
+   "IT341"
+  ],
+  "minHours": null,
+  "dept": "IT"
+ },
+ {
+  "code": "CS362",
+  "nameAr": "التعرف على الأنماط ١",
+  "nameEn": "Pattern Recognition I",
+  "hours": 3,
+  "prereqs": [
+   "IT341",
+   "MA222"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "IT411",
+  "nameAr": "تأمين الشبكات والمعلومات",
+  "nameEn": "Networks & Info Security",
+  "hours": 3,
+  "prereqs": [
+   "IT331"
+  ],
+  "minHours": null,
+  "dept": "IT"
+ },
+ {
+  "code": "IT431",
+  "nameAr": "تكنولوجيا الاتصالات",
+  "nameEn": "Communication Technology",
+  "hours": 3,
+  "prereqs": [
+   "IT231"
+  ],
+  "minHours": null,
+  "dept": "IT"
+ },
+ {
+  "code": "IT421",
+  "nameAr": "برمجة وبروتوكولات الإنترنت",
+  "nameEn": "Internet Prog. & Protocols",
+  "hours": 3,
+  "prereqs": [
+   "IT331"
+  ],
+  "minHours": null,
+  "dept": "IT"
+ },
+ {
+  "code": "IT441",
+  "nameAr": "التنقيب في الوسائط المتعددة",
+  "nameEn": "Multimedia Mining",
+  "hours": 3,
+  "prereqs": [
+   "CS362"
+  ],
+  "minHours": null,
+  "dept": "IT"
+ },
+ {
+  "code": "IT442",
+  "nameAr": "الإنسان الآلي",
+  "nameEn": "Robotics",
+  "hours": 3,
+  "prereqs": [
+   "IT301"
+  ],
+  "minHours": null,
+  "dept": "IT"
+ },
+ {
+  "code": "IT443",
+  "nameAr": "النظم المدمجة",
+  "nameEn": "Embedded Systems",
+  "hours": 3,
+  "prereqs": [
+   "IT301"
+  ],
+  "minHours": null,
+  "dept": "IT"
+ },
+ {
+  "code": "IT432",
+  "nameAr": "الشبكات اللاسلكية والمتحركة",
+  "nameEn": "Wireless & Mobile Networks",
+  "hours": 3,
+  "prereqs": [
+   "IT331"
+  ],
+  "minHours": null,
+  "dept": "IT"
+ },
+ {
+  "code": "IT433",
+  "nameAr": "شبكات الحوسبة السحابية",
+  "nameEn": "Cloud Computing Networks",
+  "hours": 3,
+  "prereqs": [
+   "IT331"
+  ],
+  "minHours": null,
+  "dept": "IT"
+ },
+ {
+  "code": "IT434",
+  "nameAr": "الشبكات الضوئية",
+  "nameEn": "Optical Networks",
+  "hours": 3,
+  "prereqs": [
+   "IT331"
+  ],
+  "minHours": null,
+  "dept": "IT"
+ },
+ {
+  "code": "IT435",
+  "nameAr": "شبكات الاستشعار اللاسلكية",
+  "nameEn": "Wireless Sensor Networks",
+  "hours": 3,
+  "prereqs": [
+   "IT432"
+  ],
+  "minHours": null,
+  "dept": "IT"
+ },
+ {
+  "code": "IT412",
+  "nameAr": "الأمن السيبراني",
+  "nameEn": "Cyber Security",
+  "hours": 3,
+  "prereqs": [
+   "IT411"
+  ],
+  "minHours": null,
+  "dept": "IT"
+ },
+ {
+  "code": "CS456",
+  "nameAr": "معالجة الفيديو الرقمي",
+  "nameEn": "Digital Video Processing",
+  "hours": 3,
+  "prereqs": [
+   "CS352"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "IT444",
+  "nameAr": "الواقع الافتراضي",
+  "nameEn": "Virtual Reality",
+  "hours": 3,
+  "prereqs": [
+   "CS351",
+   "CS352"
+  ],
+  "minHours": null,
+  "dept": "IT"
+ },
+ {
+  "code": "IT445",
+  "nameAr": "معالجة الكلام",
+  "nameEn": "Speech Processing",
+  "hours": 3,
+  "prereqs": [
+   "IT342"
+  ],
+  "minHours": null,
+  "dept": "IT"
+ },
+ {
+  "code": "CS466",
+  "nameAr": "التعرف على الأنماط ٢",
+  "nameEn": "Pattern Recognition II",
+  "hours": 3,
+  "prereqs": [
+   "CS362"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "IT422",
+  "nameAr": "تكنولوجيا اللغات الإنسانية",
+  "nameEn": "Human Language Technology",
+  "hours": 3,
+  "prereqs": [
+   "CS362"
+  ],
+  "minHours": null,
+  "dept": "IT"
+ },
+ {
+  "code": "CS454",
+  "nameAr": "الرسم بالحاسب ٢",
+  "nameEn": "Computer Graphics II",
+  "hours": 3,
+  "prereqs": [
+   "CS351"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "CS455",
+  "nameAr": "الرسوم المتحركة",
+  "nameEn": "Computer Animation",
+  "hours": 3,
+  "prereqs": [
+   "CS351"
+  ],
+  "minHours": null,
+  "dept": "CS"
+ },
+ {
+  "code": "IT471",
+  "nameAr": "الحوسبة المتنقلة",
+  "nameEn": "Mobile Computing",
+  "hours": 3,
+  "prereqs": [
+   "IT432"
+  ],
+  "minHours": null,
+  "dept": "IT"
+ },
+ {
+  "code": "IT472",
+  "nameAr": "الحوسبة المتزامنة والمتوازية",
+  "nameEn": "Concurrency & Parallel Computing",
+  "hours": 3,
+  "prereqs": [
+   "CS322"
+  ],
+  "minHours": null,
+  "dept": "IT"
+ },
+ {
+  "code": "IT473",
+  "nameAr": "الحوسبة الكمية",
+  "nameEn": "Quantum Computing",
+  "hours": 3,
+  "prereqs": [
+   "CS322",
+   "CS211"
+  ],
+  "minHours": null,
+  "dept": "IT"
+ },
+ {
+  "code": "IT461",
+  "nameAr": "مشروع التخرج",
+  "nameEn": "Graduation Project",
+  "hours": 6,
+  "prereqs": [],
+  "minHours": 108,
+  "dept": "IT"
+ },
+ {
+  "code": "IS311",
+  "nameAr": "نظم إدارة قواعد البيانات",
+  "nameEn": "Database Management Systems",
+  "hours": 3,
+  "prereqs": [
+   "IS211",
+   "CS241"
+  ],
+  "minHours": null,
+  "dept": "IS"
+ },
+ {
+  "code": "IS312",
+  "nameAr": "مستودعات البيانات",
+  "nameEn": "Data Warehousing",
+  "hours": 3,
+  "prereqs": [
+   "IS211"
+  ],
+  "minHours": null,
+  "dept": "IS"
+ },
+ {
+  "code": "IS313",
+  "nameAr": "إدارة ومعالجة الملفات",
+  "nameEn": "File Management & Processing",
+  "hours": 3,
+  "prereqs": [
+   "CS211"
+  ],
+  "minHours": null,
+  "dept": "IS"
+ },
+ {
+  "code": "IS341",
+  "nameAr": "استرجاع المعلومات",
+  "nameEn": "Information Retrieval",
+  "hours": 3,
+  "prereqs": [
+   "IS211",
+   "MA222"
+  ],
+  "minHours": null,
+  "dept": "IS"
+ },
+ {
+  "code": "IS331",
+  "nameAr": "تحليل وتصميم نظم المعلومات",
+  "nameEn": "Analysis & Design of IS",
+  "hours": 3,
+  "prereqs": [
+   "IS211"
+  ],
+  "minHours": null,
+  "dept": "IS"
+ },
+ {
+  "code": "IS314",
+  "nameAr": "تطوير نظم المعلومات على الويب",
+  "nameEn": "Web-based IS Development",
+  "hours": 3,
+  "prereqs": [
+   "IS212"
+  ],
+  "minHours": null,
+  "dept": "IS"
+ },
+ {
+  "code": "IS342",
+  "nameAr": "إدارة إجراءات الأعمال",
+  "nameEn": "Business Process Management",
+  "hours": 3,
+  "prereqs": [
+   "IS331"
+  ],
+  "minHours": null,
+  "dept": "IS"
+ },
+ {
+  "code": "IS301",
+  "nameAr": "أساسيات نظم المعلومات",
+  "nameEn": "IS Fundamentals",
+  "hours": 3,
+  "prereqs": [
+   "IS211"
+  ],
+  "minHours": null,
+  "dept": "IS"
+ },
+ {
+  "code": "IS431",
+  "nameAr": "إدارة ونمذجة البيانات الكبيرة",
+  "nameEn": "Managing & Modeling Big Data",
+  "hours": 3,
+  "prereqs": [
+   "IS311"
+  ],
+  "minHours": null,
+  "dept": "IS"
+ },
+ {
+  "code": "IS411",
+  "nameAr": "التنقيب في البيانات",
+  "nameEn": "Data Mining",
+  "hours": 3,
+  "prereqs": [
+   "IS341"
+  ],
+  "minHours": null,
+  "dept": "IS"
+ },
+ {
+  "code": "IS412",
+  "nameAr": "هيكليات خدمية التوجه",
+  "nameEn": "Service-Oriented Architecture",
+  "hours": 3,
+  "prereqs": [
+   "IS314"
+  ],
+  "minHours": null,
+  "dept": "IS"
+ },
+ {
+  "code": "IS413",
+  "nameAr": "قواعد البيانات السحابية",
+  "nameEn": "Cloud Databases",
+  "hours": 3,
+  "prereqs": [
+   "IS311"
+  ],
+  "minHours": null,
+  "dept": "IS"
+ },
+ {
+  "code": "IS414",
+  "nameAr": "قواعد البيانات الموزعة",
+  "nameEn": "Distributed Database",
+  "hours": 3,
+  "prereqs": [
+   "IS311"
+  ],
+  "minHours": null,
+  "dept": "IS"
+ },
+ {
+  "code": "IS441",
+  "nameAr": "التنقيب في إجراءات الأعمال",
+  "nameEn": "Business Process Mining",
+  "hours": 3,
+  "prereqs": [
+   "IS342"
+  ],
+  "minHours": null,
+  "dept": "IS"
+ },
+ {
+  "code": "IS415",
+  "nameAr": "تطبيقات الحوسبة المحمولة",
+  "nameEn": "Mobile Computing Applications",
+  "hours": 3,
+  "prereqs": [
+   "IS314"
+  ],
+  "minHours": null,
+  "dept": "IS"
+ },
+ {
+  "code": "IS421",
+  "nameAr": "منهجيات تطوير نظم المعلومات",
+  "nameEn": "IS Development Methodologies",
+  "hours": 3,
+  "prereqs": [
+   "IS331"
+  ],
+  "minHours": null,
+  "dept": "IS"
+ },
+ {
+  "code": "IS422",
+  "nameAr": "تطبيقات نظم المعلومات",
+  "nameEn": "IS Applications",
+  "hours": 3,
+  "prereqs": [
+   "IS331"
+  ],
+  "minHours": null,
+  "dept": "IS"
+ },
+ {
+  "code": "IS442",
+  "nameAr": "ضمان جودة نظم المعلومات",
+  "nameEn": "IS Quality Assurance",
+  "hours": 3,
+  "prereqs": [
+   "IS331"
+  ],
+  "minHours": null,
+  "dept": "IS"
+ },
+ {
+  "code": "IS443",
+  "nameAr": "أمن وإدارة مخاطر نظم المعلومات",
+  "nameEn": "IS Security & Risk Mgmt",
+  "hours": 3,
+  "prereqs": [
+   "IS331"
+  ],
+  "minHours": null,
+  "dept": "IS"
+ },
+ {
+  "code": "IS444",
+  "nameAr": "مراجعة ورقابة نظم المعلومات",
+  "nameEn": "IS Audit & Control",
+  "hours": 3,
+  "prereqs": [
+   "IS331"
+  ],
+  "minHours": null,
+  "dept": "IS"
+ },
+ {
+  "code": "IS445",
+  "nameAr": "نظم معلومات المؤسسة",
+  "nameEn": "Enterprise Information Systems",
+  "hours": 3,
+  "prereqs": [
+   "IS314"
+  ],
+  "minHours": null,
+  "dept": "IS"
+ },
+ {
+  "code": "IS446",
+  "nameAr": "إدارة مشاريع نظم المعلومات",
+  "nameEn": "IS Project Management",
+  "hours": 3,
+  "prereqs": [
+   "IS331"
+  ],
+  "minHours": null,
+  "dept": "IS"
+ },
+ {
+  "code": "IS447",
+  "nameAr": "التجارة الإلكترونية",
+  "nameEn": "E-Business",
+  "hours": 3,
+  "prereqs": [
+   "IS331"
+  ],
+  "minHours": null,
+  "dept": "IS"
+ },
+ {
+  "code": "IS451",
+  "nameAr": "مشروع التخرج",
+  "nameEn": "Graduation Project",
+  "hours": 6,
+  "prereqs": [],
+  "minHours": 108,
+  "dept": "IS"
+ },
+ {
+  "code": "MA301",
+  "nameAr": "التفكير الاحتمالي",
+  "nameEn": "Probabilistic Reasoning",
+  "hours": 3,
+  "prereqs": [
+   "MA222"
+  ],
+  "minHours": null,
+  "dept": "عام"
+ },
+ {
+  "code": "AI321",
+  "nameAr": "الذكاء الحسابي",
+  "nameEn": "Computational Intelligence",
+  "hours": 3,
+  "prereqs": [
+   "MA113",
+   "MA222"
+  ],
+  "minHours": null,
+  "dept": "AI"
+ },
+ {
+  "code": "MA302",
+  "nameAr": "البرمجة الخطية والصحيحة",
+  "nameEn": "Linear & Integer Programming",
+  "hours": 3,
+  "prereqs": [
+   "MA113"
+  ],
+  "minHours": null,
+  "dept": "عام"
+ },
+ {
+  "code": "AI311",
+  "nameAr": "تحليل البيانات",
+  "nameEn": "Data Analytics",
+  "hours": 3,
+  "prereqs": [
+   "MA222"
+  ],
+  "minHours": null,
+  "dept": "AI"
+ },
+ {
+  "code": "AI312",
+  "nameAr": "علوم البيانات",
+  "nameEn": "Data Science",
+  "hours": 3,
+  "prereqs": [
+   "MA222"
+  ],
+  "minHours": null,
+  "dept": "AI"
+ },
+ {
+  "code": "AI313",
+  "nameAr": "الشبكات العصبية",
+  "nameEn": "Neural Networks",
+  "hours": 3,
+  "prereqs": [
+   "AI312"
+  ],
+  "minHours": null,
+  "dept": "AI"
+ },
+ {
+  "code": "AI411",
+  "nameAr": "التعلم العميق",
+  "nameEn": "Deep Learning",
+  "hours": 3,
+  "prereqs": [
+   "AI312",
+   "AI301"
+  ],
+  "minHours": null,
+  "dept": "AI"
+ },
+ {
+  "code": "AI425",
+  "nameAr": "الأنظمة الخبيرة",
+  "nameEn": "Expert Systems",
+  "hours": 3,
+  "prereqs": [
+   "AI301"
+  ],
+  "minHours": null,
+  "dept": "AI"
+ },
+ {
+  "code": "AI426",
+  "nameAr": "الحوسبة التطورية",
+  "nameEn": "Evolutionary Computing",
+  "hours": 3,
+  "prereqs": [
+   "CS311"
+  ],
+  "minHours": null,
+  "dept": "AI"
+ },
+ {
+  "code": "AI422",
+  "nameAr": "نظم صنع القرار",
+  "nameEn": "Decision Making Systems",
+  "hours": 3,
+  "prereqs": [
+   "MA302"
+  ],
+  "minHours": null,
+  "dept": "AI"
+ },
+ {
+  "code": "AI424",
+  "nameAr": "النمذجة القائمة على الوكلاء",
+  "nameEn": "Agent-Based Modeling",
+  "hours": 3,
+  "prereqs": [
+   "AI321"
+  ],
+  "minHours": null,
+  "dept": "AI"
+ },
+ {
+  "code": "AI431",
+  "nameAr": "إدارة مشروعات الذكاء الاصطناعي",
+  "nameEn": "AI Project Management",
+  "hours": 3,
+  "prereqs": [
+   "MA231"
+  ],
+  "minHours": null,
+  "dept": "AI"
+ },
+ {
+  "code": "AI423",
+  "nameAr": "اللغويات الحاسوبية",
+  "nameEn": "Computational Linguistics",
+  "hours": 3,
+  "prereqs": [
+   "CS311"
+  ],
+  "minHours": null,
+  "dept": "AI"
+ },
+ {
+  "code": "AI412",
+  "nameAr": "تصور البيانات",
+  "nameEn": "Data Visualization",
+  "hours": 3,
+  "prereqs": [
+   "MA112",
+   "MA222"
+  ],
+  "minHours": null,
+  "dept": "AI"
+ },
+ {
+  "code": "AI432",
+  "nameAr": "إنترنت الأشياء",
+  "nameEn": "Internet of Things",
+  "hours": 3,
+  "prereqs": [
+   "CS241"
+  ],
+  "minHours": null,
+  "dept": "AI"
+ },
+ {
+  "code": "AI434",
+  "nameAr": "مشروع التخرج",
+  "nameEn": "Graduation Project",
+  "hours": 6,
+  "prereqs": [],
+  "minHours": 108,
+  "dept": "AI"
+ }
+]

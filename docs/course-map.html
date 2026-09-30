@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>خريطة المقررات والمتطلبات السابقة — كلية الحاسبات والمعلومات</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;900&family=Reem+Kufi:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF1F5; --panel:#fff; --ink:#14293D; --ink-soft:#3E5670; --faint:#7C8CA0;
+    --line:#D7DDE5; --gold:#A9782A; --gold-soft:#EADFC4; --gold-line:#D8C393;
+    --cs:#14293D; --is:#2E7D5B; --it:#3E6B8C; --ai:#A9782A; --base:#6B7A8D;
+    --anc:#2C6FB0; --desc:#2E7D5B; --sel:#A9782A;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--paper);color:var(--ink);font-family:"Cairo",system-ui,sans-serif;line-height:1.65;-webkit-text-size-adjust:100%}
+  .page{display:none}
+  .page.on{display:block}
+
+  /* ============ GUIDE PAGE ============ */
+  .guide{max-width:820px;margin:0 auto;padding:clamp(24px,5vw,60px) 20px 70px}
+  .kick{font-family:"Cairo";font-weight:600;font-size:13px;color:var(--gold);letter-spacing:.4px;margin:0 0 6px}
+  .guide h1{font-family:"Reem Kufi";font-weight:700;font-size:clamp(26px,6vw,40px);margin:0 0 10px;line-height:1.2}
+  .guide .intro{color:var(--ink-soft);font-size:clamp(15px,2.4vw,17px);margin:0 0 26px}
+  .gsec{background:#fff;border:1px solid var(--line);border-radius:16px;padding:clamp(18px,3vw,26px);margin-bottom:16px;
+        box-shadow:0 10px 30px -24px rgba(20,41,61,.5)}
+  .gsec h2{font-family:"Reem Kufi";font-weight:600;font-size:clamp(18px,3vw,22px);margin:0 0 14px;display:flex;align-items:center;gap:11px}
+  .gnum{font-family:"Reem Kufi";font-weight:700;font-size:16px;color:var(--gold);background:var(--gold-soft);border:1px solid var(--gold-line);
+        width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .gsec p{margin:0 0 10px;font-size:14.5px;color:var(--ink-soft)}
+  .gsec p b{color:var(--ink)}
+  .steps{list-style:none;margin:0;padding:0}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-top:1px solid #EEF1F5;font-size:14.5px}
+  .steps li:first-child{border-top:0}
+  .steps .n{font-family:"Reem Kufi";font-weight:700;color:#fff;background:var(--ink);width:26px;height:26px;border-radius:50%;
+        display:flex;align-items:center;justify-content:center;flex:0 0 auto;font-size:13px}
+  .steps b{color:var(--ink)}
+  .legend{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;font-size:13.5px;color:var(--ink-soft)}
+  .lg{display:flex;align-items:center;gap:7px}
+  .sw{width:14px;height:14px;border-radius:4px;display:inline-block}
+  .lg .line{width:26px;height:0;border-top:3px solid;border-radius:2px}
+  .note{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;color:var(--ink-soft)}
+  .note .m{color:var(--gold);font-weight:800;font-size:17px;line-height:1.3;flex:0 0 auto}
+  .cta{display:inline-flex;align-items:center;gap:10px;margin-top:8px;background:var(--ink);color:#fff;border:0;cursor:pointer;
+       font-family:"Cairo";font-weight:700;font-size:16px;padding:15px 30px;border-radius:13px;text-decoration:none;
+       box-shadow:0 14px 30px -14px rgba(20,41,61,.6);transition:.15s}
+  .cta:hover{transform:translateY(-1px)}
+  .cta .ar{font-family:"Reem Kufi";font-size:20px;color:var(--gold-line)}
+  .gfoot{color:var(--faint);font-size:12.5px;margin-top:22px;text-align:center}
+
+  /* ============ MAP PAGE ============ */
+  .mapbar{position:sticky;top:0;z-index:20;background:rgba(238,241,245,.92);backdrop-filter:blur(8px);
+          border-bottom:1px solid var(--line);padding:10px clamp(12px,3vw,22px)}
+  .mapbar-in{max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center}
+  .backbtn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 13px;cursor:pointer;
+           font-family:"Cairo";font-weight:700;font-size:13px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;flex:0 0 auto}
+  .backbtn:hover{background:#F5F7F9}
+  .mtitle{font-family:"Reem Kufi";font-weight:700;font-size:15px;color:var(--ink);flex:0 0 auto}
+  .tabs{display:flex;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:12px;padding:3px;gap:2px}
+  .tab{border:0;background:transparent;font-family:"Cairo";font-weight:700;font-size:13px;color:var(--ink-soft);
+       padding:8px 13px;border-radius:9px;cursor:pointer;transition:.15s;white-space:nowrap}
+  .tab.active{color:#fff}
+  .tab[data-t="CS"].active{background:var(--cs)} .tab[data-t="IS"].active{background:var(--is)}
+  .tab[data-t="IT"].active{background:var(--it)} .tab[data-t="AI"].active{background:var(--ai)}
+  .grow{flex:1 1 auto}
+  .zoom{display:flex;align-items:center;gap:4px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:3px;flex:0 0 auto}
+  .zoom button{border:0;background:transparent;width:32px;height:30px;border-radius:7px;cursor:pointer;font-weight:700;font-size:16px;color:var(--ink-soft)}
+  .zoom button:hover{background:var(--paper)}
+  .zoom .fit{width:auto;padding:0 10px;font-family:"Cairo";font-size:12px;font-weight:700}
+  .stat{font-size:12.5px;color:var(--ink-soft);flex:0 0 auto}
+  .stat b{font-family:"Reem Kufi";color:var(--ink);font-size:15px}
+
+  .stage{max-width:1280px;margin:0 auto;padding:14px clamp(12px,3vw,22px) 40px;display:grid;grid-template-columns:1fr 300px;gap:16px;align-items:start}
+  .graphwrap{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 12px 34px -24px rgba(20,41,61,.4);overflow:hidden;min-width:0}
+  .axis{display:flex;justify-content:space-between;align-items:center;padding:10px 18px;border-bottom:1px solid var(--line);
+        background:linear-gradient(90deg,#F8F3E7,#fff);font-size:12px;font-weight:700;color:var(--gold)}
+  .axis .mid{color:var(--faint);font-weight:600;font-size:11px;letter-spacing:2px}
+  .scroll{overflow:auto;max-height:78vh;-webkit-overflow-scrolling:touch}
+  svg{display:block;font-family:"Cairo",sans-serif}
+
+  .nbox{width:100%;height:100%;border-radius:11px;border:2.5px solid transparent;padding:7px 10px;
+        display:flex;flex-direction:column;justify-content:center;gap:2px;cursor:pointer;overflow:hidden;
+        transition:opacity .18s,border-color .18s,box-shadow .18s;position:relative}
+  .nbox .code{font-family:"Reem Kufi";font-weight:700;font-size:13px;color:#fff;letter-spacing:.3px;line-height:1}
+  .nbox .nm{font-family:"Cairo";font-weight:600;font-size:13px;color:#fff;line-height:1.28;
+        display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .nbox .meta{position:absolute;top:6px;left:9px;font-size:9.5px;font-weight:700;color:rgba(255,255,255,.62);font-family:"Reem Kufi"}
+  .edge{fill:none;stroke:#B9C2CE;stroke-width:1.6;transition:opacity .18s,stroke .18s,stroke-width .18s}
+  .dim{opacity:.1}
+  .node.sel .nbox{border-color:var(--sel);box-shadow:0 0 0 3px rgba(169,120,42,.18)}
+  .node.anc .nbox{border-color:var(--anc)}
+  .node.desc .nbox{border-color:var(--desc)}
+  .node.dim{opacity:.12}
+
+  .side{position:sticky;top:70px;display:flex;flex-direction:column;gap:14px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 10px 30px -24px rgba(20,41,61,.4)}
+  .hint{color:var(--ink-soft);font-size:13.5px}
+  .hint b{color:var(--ink)}
+  .dcode{font-family:"Reem Kufi";font-weight:700;font-size:22px;color:#fff;display:inline-block;padding:3px 12px;border-radius:9px}
+  .dname{font-weight:700;font-size:16px;margin:10px 0 2px}
+  .den{font-size:12.5px;color:var(--faint);margin:0 0 12px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+  .chip{font-size:12px;font-weight:600;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:3px 11px;color:var(--ink-soft)}
+  .req h4{margin:12px 0 6px;font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px}
+  .req h4 .d{width:8px;height:8px;border-radius:50%}
+  .req .none{font-size:12.5px;color:var(--faint)}
+  .pill{display:block;font-size:13px;padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid var(--line);cursor:pointer;transition:.12s}
+  .pill:hover{background:var(--paper)}
+  .pill b{font-family:"Reem Kufi";font-weight:700;margin-inline-end:6px}
+  .pill.up{border-inline-start:3px solid var(--anc)}
+  .pill.dn{border-inline-start:3px solid var(--desc)}
+  .reset{margin-top:6px;width:100%;border:1px solid var(--line);background:var(--paper);border-radius:9px;padding:8px;
+         font-family:"Cairo";font-weight:700;font-size:13px;color:var(--ink-soft);cursor:pointer}
+  .reset:hover{background:#E3E8EE}
+
+  @media(max-width:860px){
+    .stage{grid-template-columns:1fr}
+    .side{position:static}
+    .scroll{max-height:66vh}
+    .mtitle{display:none}
+  }
+  @media(max-width:520px){
+    .tabs{width:100%;justify-content:space-between}
+    .tab{flex:1 1 auto;text-align:center;font-size:12px;padding:8px 6px}
+    .grow{display:none}
+    .stat{width:100%;order:5}
+  }
+
+  /* ============ BYLAW / GPA PAGE ============ */
+  .cta.alt{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:none;margin-inline-start:10px}
+  .cta.alt .ar{color:var(--gold)}
+  .byhead{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:22px}
+  .bylaw .distbar{display:flex;height:52px;border-radius:11px;overflow:hidden;border:1px solid var(--line);margin-bottom:18px}
+  .bylaw .distbar>div{display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px}
+  .tablewrap{overflow-x:auto;border-radius:14px;border:1px solid var(--line)}
+  table{width:100%;border-collapse:collapse;font-size:14px;min-width:420px}
+  thead th{background:var(--ink);color:#EAF0F6;font-weight:600;font-size:13px;padding:12px 12px;text-align:center}
+  tbody td{padding:10px 12px;text-align:center;border-bottom:1px solid #EEF1F5}
+  tbody tr:last-child td{border-bottom:0}
+  .gr{font-family:"Reem Kufi";font-weight:700;font-size:16px}
+  .pts{font-family:"Reem Kufi";font-weight:700;font-size:16px}
+  .band-pass{background:#E4F1EA}.band-pass .gr{color:var(--desc)}
+  .band-mid{background:#F5EBD8}.band-mid .gr{color:#B07A2E}
+  .band-fail{background:#F5E1E1}.band-fail .gr{color:#B23A3A}
+  .dp{font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;display:inline-block}
+  .p-exc{background:#DDEBE3;color:#256B4C}.p-vg{background:#DCE7F0;color:#2C567A}
+  .p-good{background:#EDE6D2;color:#8A6A26}.p-acc{background:#F2E7D6;color:#9A6C28}.p-fail{background:#F0DADA;color:#A23636}
+  .formula{background:linear-gradient(180deg,#FCFAF4,#F8F3E7);border:1px solid var(--gold-line);border-radius:14px;padding:18px 20px;margin-bottom:14px}
+  .formula .name{font-weight:700;font-size:14px;color:var(--gold);margin:0 0 10px}
+  .eq{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:14px;font-weight:600}
+  .eq .lhs{font-family:"Reem Kufi";font-weight:700;font-size:17px;color:var(--gold)}
+  .frac{display:inline-flex;flex-direction:column;text-align:center;font-size:13px;color:var(--ink-soft)}
+  .frac .top{padding:0 10px 5px;border-bottom:2px solid var(--ink)}
+  .frac .bot{padding:5px 10px 0}
+  .frac b{color:var(--ink)}
+  .steps-x{background:var(--paper);border:1px dashed var(--gold-line);border-radius:10px;padding:12px 16px;font-size:13.5px;color:var(--ink-soft);margin-top:4px}
+  .steps-x code{font-family:"Reem Kufi";font-weight:700;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:6px;padding:1px 7px}
+  tfoot td{padding:12px;font-weight:700;background:#F3F5F8;border-top:2px solid var(--ink)}
+  .qp{font-family:"Reem Kufi";font-weight:700;color:var(--gold);font-size:15px}
+  .extotal{display:flex;justify-content:space-between;align-items:center;background:var(--ink);color:#fff;border-radius:12px;padding:15px 20px;margin-top:14px}
+  .extotal .t{font-size:14px;color:#B9C8D8;font-weight:600}
+  .extotal .v{font-family:"Reem Kufi";font-weight:700;font-size:30px;color:var(--gold-line)}
+  .extotal .v small{font-size:14px;color:#9DB0C4;font-family:"Cairo";font-weight:600}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .mini{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  .mini h3{margin:0 0 10px;font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px}
+  .mini h3 .dot{width:9px;height:9px;border-radius:50%}
+  .kv{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-top:1px solid #EEF1F5;font-size:14px}
+  .kv:first-of-type{border-top:0}.kv span{color:var(--ink-soft)}
+  .kv b{font-family:"Reem Kufi";font-weight:700;color:var(--ink);font-size:16px}
+  @media(max-width:640px){ .two{grid-template-columns:1fr} }
+.backtoguide{display:inline-flex;align-items:center;gap:7px;text-decoration:none;font-family:"Cairo";font-weight:700;
+  font-size:13.5px;color:var(--gold);background:var(--gold-soft);border:1px solid var(--gold-line);
+  padding:8px 14px;border-radius:10px;margin:0 0 18px}
+.backtoguide:hover{filter:brightness(.97)}
+.bar-guidelink{margin-inline-start:6px;text-decoration:none}
+</style>
+</head>
+<body>
+
+<!-- ================= GUIDE PAGE ================= -->
+<div class="page on" id="page-guide">
+  <div class="guide">
+    <a href="index.html" class="backtoguide">→ العودة إلى دليل الطالب</a>
+    <p class="kick">لائحة كلية الحاسبات والمعلومات · جامعة قنا (2019)</p>
+    <h1>خريطة المقررات والمتطلبات السابقة</h1>
+    <p class="intro">أداة تفاعلية توضّح شبكة المتطلبات السابقة (Prerequisites) لكل مقررات مرحلة البكالوريوس عبر التخصصات الأربعة.
+       اقرئي التعليمات بالأسفل ثم افتحي الخريطة.</p>
+
+    <div class="gsec">
+      <h2><span class="gnum">١</span>إزاي تقرأ الخريطة</h2>
+      <p>كل <b>سهم</b> يعني أن المقرر لا يُدرَس إلا بعد اجتياز المقرر الذي يشير إليه (متطلب سابق).</p>
+      <p>المقررات <b>الأساسية على اليمين</b>، وكلما اتجهنا لليسار زاد عمق المتطلبات وصارت المقررات <b>أكثر تقدّمًا</b>.</p>
+      <p>لون كل عقدة يدل على القسم صاحب المقرر.</p>
+    </div>
+
+    <div class="gsec">
+      <h2><span class="gnum">٢</span>طريقة الاستخدام</h2>
+      <ol class="steps">
+        <li><span class="n">1</span><div>اختاري <b>التخصص</b> من التابات بالأعلى (علوم الحاسب / نظم المعلومات / تكنولوجيا المعلومات / الذكاء الاصطناعي).</div></li>
+        <li><span class="n">2</span><div><b>دوسي على أي مقرر</b> فيتظلّل: سلسلة متطلباته السابقة (أزرق)، والمقررات التي يفتحها (أخضر)، ويُعتَّم الباقي.</div></li>
+        <li><span class="n">3</span><div>من <b>لوحة التفاصيل</b> اعرفي الساعات، المتطلب المباشر، والمقررات التي يفتحها — وكل عنصر قابل للنقر للتنقّل.</div></li>
+        <li><span class="n">4</span><div>استخدمي أزرار <b>التكبير / الاحتواء</b> للتنقل، خصوصًا على الموبايل. اضغطي على أي مساحة فارغة لمسح التحديد.</div></li>
+      </ol>
+    </div>
+
+    <div class="gsec">
+      <h2><span class="gnum">٣</span>مفتاح الألوان</h2>
+      <div class="legend">
+        <span class="lg"><span class="sw" style="background:var(--base)"></span>عام / أساسي</span>
+        <span class="lg"><span class="sw" style="background:var(--cs)"></span>علوم الحاسب CS</span>
+        <span class="lg"><span class="sw" style="background:var(--is)"></span>نظم المعلومات IS</span>
+        <span class="lg"><span class="sw" style="background:var(--it)"></span>تكنولوجيا المعلومات IT</span>
+        <span class="lg"><span class="sw" style="background:var(--ai)"></span>الذكاء الاصطناعي AI</span>
+        <span class="lg"><span class="line" style="border-color:var(--anc)"></span>يتطلب (سلسلة سابقة)</span>
+        <span class="lg"><span class="line" style="border-color:var(--desc)"></span>يفتح (يعتمد عليه)</span>
+      </div>
+    </div>
+
+    <div class="gsec">
+      <h2><span class="gnum">٤</span>ملاحظات على البيانات</h2>
+      <p class="note"><span class="m">•</span><span>مقررات المتطلبات العامة (الإنسانيات) مستقلة بلا متطلبات سابقة، فلم تُدرَج في الشبكة لتفادي التزاحم.</span></p>
+      <p class="note"><span class="m">•</span><span>مشاريع التخرج بوابتها اجتياز <b>108</b> ساعة، والتدريب الميداني <b>72</b> ساعة (تظهر كشارة على العقدة).</span></p>
+      <p class="note"><span class="m">•</span><span>المتطلبات مستخرجة من <b>جداول التخصص</b> في اللائحة المعتمدة. الأداة للأغراض الإرشادية والمرجع هو نص اللائحة.</span></p>
+    </div>
+
+    <button class="cta" id="openMap">افتحي الخريطة <span class="ar">←</span></button>
+    <button class="cta alt" id="openBylaw">اللائحة وحساب المعدل <span class="ar">↗</span></button>
+    <p class="gfoot">كلية الحاسبات والمعلومات — جامعة قنا · نظام الساعات المعتمدة</p>
+  </div>
+</div>
+
+<!-- ================= MAP PAGE ================= -->
+<div class="page" id="page-map">
+  <div class="mapbar">
+    <div class="mapbar-in">
+      <button class="backbtn" id="toGuide">☰ التعليمات</button>
+      <a href="index.html" class="backbtn bar-guidelink">🎓 دليل الطالب</a>
+      <span class="mtitle">خريطة المتطلبات</span>
+      <div class="tabs" id="tabs">
+        <button class="tab active" data-t="CS">علوم الحاسب</button>
+        <button class="tab" data-t="IS">نظم المعلومات</button>
+        <button class="tab" data-t="IT">تكنولوجيا المعلومات</button>
+        <button class="tab" data-t="AI">الذكاء الاصطناعي</button>
+      </div>
+      <span class="grow"></span>
+      <div class="zoom">
+        <button id="zout" title="تصغير">−</button>
+        <button class="fit" id="zfit" title="احتواء">احتواء</button>
+        <button id="zin" title="تكبير">+</button>
+      </div>
+      <span class="stat" id="stat"></span>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="graphwrap">
+      <div class="axis"><span>متقدّم ←</span><span class="mid">تدرّج المتطلبات</span><span>→ أساسي</span></div>
+      <div class="scroll" id="scroll"><svg id="svg"></svg></div>
+    </div>
+    <div class="side">
+      <div class="card" id="detail">
+        <p class="hint"><b>دوسي على أي مقرر</b> لعرض تفاصيله وسلسلة متطلباته.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= BYLAW / GPA PAGE ================= -->
+<div class="page" id="page-bylaw">
+  <div class="guide">
+    <div class="byhead">
+      <button class="backbtn" id="toGuide2">☰ التعليمات</button>
+      <a href="index.html" class="backbtn bar-guidelink">🎓 دليل الطالب</a>
+      <button class="backbtn" id="toMap2">🗺 الخريطة</button>
+    </div>
+    <p class="kick">اللائحة الداخلية · نظام الساعات المعتمدة</p>
+    <h1>حساب المعدل التراكمي ونِسب الدرجات</h1>
+    <p class="intro">التخرّج يتطلب <b>144 ساعة معتمدة</b> بمعدل تراكمي عام لا يقل عن <b>2.0</b>. فيما يلي توزيع درجات المقرر، جدول التقدير والنقاط، وطريقة حساب الـ GPA.</p>
+
+    <!-- A: exam distribution / test rates -->
+    <div class="gsec">
+      <h2><span class="gnum">١</span>توزيع درجات المقرر (100 درجة)</h2>
+      <div class="distbar">
+        <div style="flex:50;background:#3E6B8C">أعمال الفصل · 50</div>
+        <div style="flex:50;background:#14293D">الامتحان النهائي · 50</div>
+      </div>
+      <div class="two">
+        <div class="mini">
+          <h3><span class="dot" style="background:var(--it)"></span>مقرر نظري</h3>
+          <div class="kv"><span>اختبارات دورية وتطبيقات</span><b>25</b></div>
+          <div class="kv"><span>امتحان شفوي</span><b>25</b></div>
+          <div class="kv"><span>الامتحان النهائي</span><b>50</b></div>
+        </div>
+        <div class="mini">
+          <h3><span class="dot" style="background:var(--is)"></span>مقرر عملي</h3>
+          <div class="kv"><span>اختبارات دورية</span><b>15</b></div>
+          <div class="kv"><span>امتحان عملي</span><b>15</b></div>
+          <div class="kv"><span>امتحان شفوي</span><b>20</b></div>
+          <div class="kv"><span>الامتحان النهائي</span><b>50</b></div>
+        </div>
+      </div>
+      <p class="note" style="margin-top:12px"><span class="m">!</span><span>الحضور <b>≥ 75%</b> شرط لدخول الامتحان النهائي؛ تجاوز الغياب <b>25%</b> يُعرّض الطالب للحرمان. زمن الامتحان النظري ساعتان.</span></p>
+    </div>
+
+    <!-- B: grade scale (rates -> grade -> points) -->
+    <div class="gsec">
+      <h2><span class="gnum">٢</span>جدول التقدير والنقاط</h2>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>النسبة المئوية</th><th>التقدير</th><th>النقاط</th><th>الوصف</th></tr></thead>
+          <tbody>
+            <tr class="band-pass"><td>95% فأعلى</td><td class="gr">+A</td><td class="pts">4.0</td><td><span class="dp p-exc">ممتاز</span></td></tr>
+            <tr class="band-pass"><td>90% – أقل من 95%</td><td class="gr">A</td><td class="pts">3.7</td><td><span class="dp p-exc">ممتاز</span></td></tr>
+            <tr class="band-pass"><td>85% – أقل من 90%</td><td class="gr">−A</td><td class="pts">3.3</td><td><span class="dp p-exc">ممتاز</span></td></tr>
+            <tr class="band-pass"><td>80% – أقل من 85%</td><td class="gr">+B</td><td class="pts">3.0</td><td><span class="dp p-vg">جيد جدًا</span></td></tr>
+            <tr class="band-pass"><td>75% – أقل من 80%</td><td class="gr">B</td><td class="pts">2.8</td><td><span class="dp p-vg">جيد جدًا</span></td></tr>
+            <tr class="band-mid"><td>70% – أقل من 75%</td><td class="gr">+C</td><td class="pts">2.6</td><td><span class="dp p-good">جيد</span></td></tr>
+            <tr class="band-mid"><td>65% – أقل من 70%</td><td class="gr">C</td><td class="pts">2.3</td><td><span class="dp p-good">جيد</span></td></tr>
+            <tr class="band-mid"><td>60% – أقل من 65%</td><td class="gr">+D</td><td class="pts">2.0</td><td><span class="dp p-acc">مقبول</span></td></tr>
+            <tr class="band-mid"><td>55% – أقل من 60%</td><td class="gr">D</td><td class="pts">1.7</td><td><span class="dp p-acc">مقبول مشروط</span></td></tr>
+            <tr class="band-mid"><td>50% – أقل من 55%</td><td class="gr">−D</td><td class="pts">1.4</td><td><span class="dp p-acc">مقبول مشروط</span></td></tr>
+            <tr class="band-fail"><td>أقل من 50%</td><td class="gr">F</td><td class="pts">0</td><td><span class="dp p-fail">راسب</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- C: GPA formulas + worked example -->
+    <div class="gsec">
+      <h2><span class="gnum">٣</span>حساب المعدل التراكمي (GPA)</h2>
+      <div class="formula">
+        <p class="name">المعدل الفصلي</p>
+        <div class="eq"><span class="lhs">GPA =</span>
+          <span class="frac"><span class="top"><b>مجموع</b> ( نقاط كل مقرر × ساعاته )</span><span class="bot"><b>مجموع</b> ساعات مقررات الفصل</span></span>
+        </div>
+      </div>
+      <div class="formula">
+        <p class="name">المعدل التراكمي العام</p>
+        <div class="eq"><span class="lhs">CGPA =</span>
+          <span class="frac"><span class="top"><b>مجموع</b> ( نقاط كل مقرر دُرِس × ساعاته )</span><span class="bot"><b>مجموع</b> ساعات كل المقررات في جميع الفصول</span></span>
+        </div>
+      </div>
+      <div class="steps-x"><code>1</code> حوّلي النسبة لنقاط &nbsp;←&nbsp; <code>2</code> نقاط × ساعات = نقاط الجودة &nbsp;←&nbsp; <code>3</code> مجموع نقاط الجودة ÷ الساعات &nbsp;←&nbsp; <code>4</code> قرّبي لرقمين عشريين.</div>
+
+      <div class="tablewrap" style="margin-top:16px">
+        <table>
+          <thead><tr><th>المقرر</th><th>الساعات</th><th>النسبة</th><th>التقدير</th><th>النقاط</th><th>نقاط الجودة</th></tr></thead>
+          <tbody>
+            <tr><td>أساسيات البرمجة</td><td>3</td><td>90%</td><td class="gr" style="color:var(--desc)">A</td><td class="pts">3.7</td><td class="qp">11.1</td></tr>
+            <tr><td>رياضيات ١</td><td>3</td><td>82%</td><td class="gr" style="color:var(--desc)">+B</td><td class="pts">3.0</td><td class="qp">9.0</td></tr>
+            <tr><td>هياكل متقطعة</td><td>3</td><td>67%</td><td class="gr" style="color:#B07A2E">C</td><td class="pts">2.3</td><td class="qp">6.9</td></tr>
+            <tr><td>احتمالات وإحصاء ١</td><td>3</td><td>96%</td><td class="gr" style="color:var(--desc)">+A</td><td class="pts">4.0</td><td class="qp">12.0</td></tr>
+            <tr><td>إلكترونيات</td><td>3</td><td>63%</td><td class="gr" style="color:#B07A2E">+D</td><td class="pts">2.0</td><td class="qp">6.0</td></tr>
+          </tbody>
+          <tfoot><tr><td>الإجمالي</td><td>15</td><td colspan="3">مجموع نقاط الجودة</td><td class="qp" style="font-size:17px">45.0</td></tr></tfoot>
+        </table>
+      </div>
+      <div class="extotal"><span class="t">GPA = 45.0 ÷ 15 =</span><span class="v">3.00 <small>/ 4.0</small></span></div>
+    </div>
+
+    <!-- D: general grade + pass/probation -->
+    <div class="gsec">
+      <h2><span class="gnum">٤</span>التقدير العام والنجاح</h2>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>المعدل التراكمي</th><th>التقدير</th><th>الوصف</th></tr></thead>
+          <tbody>
+            <tr class="band-pass"><td>3.8 – 4.0</td><td class="gr">A</td><td><span class="dp p-exc">ممتاز</span></td></tr>
+            <tr class="band-pass"><td>3.3 – أقل من 3.8</td><td class="gr">A</td><td><span class="dp p-exc">ممتاز</span></td></tr>
+            <tr class="band-pass"><td>3.1 – أقل من 3.3</td><td class="gr">+B</td><td><span class="dp p-vg">جيد جدًا</span></td></tr>
+            <tr class="band-pass"><td>2.8 – أقل من 3.1</td><td class="gr">B</td><td><span class="dp p-vg">جيد جدًا</span></td></tr>
+            <tr class="band-mid"><td>2.6 – أقل من 2.8</td><td class="gr">+C</td><td><span class="dp p-good">جيد</span></td></tr>
+            <tr class="band-mid"><td>2.3 – أقل من 2.6</td><td class="gr">C</td><td><span class="dp p-good">جيد</span></td></tr>
+            <tr class="band-mid"><td>2.0 – أقل من 2.3</td><td class="gr">+D</td><td><span class="dp p-acc">مقبول</span></td></tr>
+            <tr class="band-fail"><td>1.4 – أقل من 2.0</td><td class="gr">D</td><td><span class="dp p-fail">ضعيف</span></td></tr>
+            <tr class="band-fail"><td>أقل من 1.4</td><td class="gr">F</td><td><span class="dp p-fail">ضعيف جدًا</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="two" style="margin-top:14px">
+        <div class="mini">
+          <h3><span class="dot" style="background:var(--desc)"></span>النجاح والتخرج</h3>
+          <div class="kv"><span>النجاح في مقرر</span><b style="color:var(--desc)">≥ 1.4</b></div>
+          <div class="kv"><span>المعدل العام للتخرج</span><b style="color:var(--desc)">≥ 2.0</b></div>
+          <div class="kv"><span>مرتبة الشرف (بدون رسوب، ≤ 4 سنوات)</span><b style="color:var(--desc)">≥ 2.8</b></div>
+        </div>
+        <div class="mini">
+          <h3><span class="dot" style="background:#B23A3A"></span>الملاحظة الأكاديمية</h3>
+          <div class="kv"><span>الوضع تحت الملاحظة إذا المعدل</span><b style="color:#B23A3A">&lt; 2.0</b></div>
+          <div class="kv"><span>المهلة لرفع المعدل</span><b>3 فصول</b></div>
+          <div class="kv"><span>الحد الأقصى للتسجيل أثناءها</span><b>12 ساعة</b></div>
+        </div>
+      </div>
+      <p class="note" style="margin-top:12px"><span class="m">•</span><span>عند الرسوب يُعاد المقرر، وبعد النجاح يُحتسب بحد أقصى <b>+D</b> (لا يزيد عن 64%). مرتبة الشرف كما وردت نصًّا في اللائحة = 2.8 (يُفضّل التحقق منها في النسخة المعتمدة).</span></p>
+    </div>
+
+    <button class="cta" id="openMap2">افتحي خريطة المقررات <span class="ar">←</span></button>
+    <p class="gfoot">ملخص إرشادي — المرجع الرسمي هو نص اللائحة المعتمد (2019).</p>
+  </div>
+</div>
+
+<script>
+const RAW = [
+ {"c":"MA111","a":"رياضيات ١","e":"Math I","cr":3,"p":[],"core":true,"t":[]},
+ {"c":"EE101","a":"إلكترونيات","e":"Electronics","cr":3,"p":[],"core":true,"t":[]},
+ {"c":"MA112","a":"هياكل متقطعة","e":"Discrete Structures","cr":3,"p":[],"core":true,"t":[]},
+ {"c":"MA113","a":"رياضيات ٢","e":"Math II","cr":3,"p":["MA111"],"core":true,"t":[]},
+ {"c":"MA121","a":"احتمالات وإحصاء ١","e":"Probability & Statistics I","cr":3,"p":["MA111"],"core":true,"t":[]},
+ {"c":"CS121","a":"أساسيات علوم الحاسب","e":"CS Fundamentals","cr":3,"p":[],"core":true,"t":[]},
+ {"c":"CS141","a":"أساسيات البرمجة","e":"Programming Fundamentals","cr":3,"p":[],"core":true,"t":[]},
+
+ {"c":"MA222","a":"احتمالات وإحصاء ٢","e":"Probability & Statistics II","cr":3,"p":["MA121"],"core":true,"t":[]},
+ {"c":"PH201","a":"فيزياء","e":"Physics","cr":3,"p":[],"core":true,"t":[]},
+ {"c":"EE201","a":"تصميم منطقي","e":"Logic Design","cr":3,"p":["EE101"],"core":true,"t":[]},
+ {"c":"IS211","a":"قواعد البيانات","e":"Database","cr":3,"p":[],"core":true,"t":[]},
+ {"c":"IS212","a":"تكنولوجيا الويب","e":"Web Technology","cr":3,"p":["CS241"],"core":true,"t":[]},
+ {"c":"IS221","a":"إدارة المشروعات","e":"Project Management","cr":3,"p":["CS121"],"core":true,"t":[]},
+ {"c":"CS211","a":"هياكل البيانات ١","e":"Data Structures I","cr":3,"p":["CS241"],"core":true,"t":[]},
+ {"c":"CS241","a":"البرمجة الشيئية","e":"Object-Oriented Programming","cr":3,"p":["CS141"],"core":true,"t":[]},
+ {"c":"CS242","a":"البرمجة المتوازية","e":"Parallel Programming","cr":3,"p":["CS241"],"core":true,"t":[]},
+ {"c":"CS291","a":"النمذجة والمحاكاة","e":"Modeling & Simulation","cr":3,"p":["CS141"],"core":true,"t":[]},
+ {"c":"IT231","a":"شبكات الحاسب ١","e":"Computer Networks I","cr":3,"p":["CS121"],"core":true,"t":[]},
+ {"c":"MA231","a":"بحوث العمليات","e":"Operations Research","cr":3,"p":["MA113"],"core":true,"t":[]},
+
+ {"c":"CS311","a":"تحليل وتصميم الخوارزميات","e":"Algorithms Analysis & Design","cr":3,"p":["CS211"],"core":true,"t":[]},
+ {"c":"CS321","a":"نظم التشغيل ١","e":"Operating Systems I","cr":3,"p":["CS121"],"core":true,"t":[]},
+ {"c":"TR301","a":"التدريب الميداني","e":"Field Training","cr":3,"p":[],"g":72,"core":true,"t":[]},
+
+ {"c":"CS312","a":"هياكل البيانات ٢","e":"Data Structures II","cr":3,"p":["CS211"],"t":["CS"]},
+ {"c":"CS341","a":"مفاهيم لغات البرمجة","e":"Concepts of Prog. Languages","cr":3,"p":["CS312"],"t":["CS"]},
+ {"c":"CS322","a":"بنية وتنظيم الحاسبات","e":"Computer Architecture","cr":3,"p":["EE201"],"t":["CS","IT"]},
+ {"c":"CS351","a":"الرسم بالحاسب ١","e":"Computer Graphics I","cr":3,"p":["MA113"],"t":["CS","IT"]},
+ {"c":"CS352","a":"معالجة الصور","e":"Image Processing","cr":3,"p":["CS241"],"t":["CS","IT"]},
+ {"c":"CS391","a":"هندسة البرمجيات","e":"Software Engineering","cr":3,"p":[],"t":["CS","IS"]},
+ {"c":"AI301","a":"الذكاء الاصطناعي","e":"Artificial Intelligence","cr":3,"p":["CS211"],"t":["CS","IS","AI"]},
+ {"c":"CS331","a":"البرمجة المرئية","e":"Visual Programming","cr":3,"p":["CS211"],"t":["CS"]},
+ {"c":"IT302","a":"التشفير","e":"Cryptography","cr":3,"p":["MA113"],"t":["CS","IT"]},
+ {"c":"CS441","a":"المترجمات","e":"Compiler Construction","cr":3,"p":["CS322"],"t":["CS"]},
+ {"c":"CS401","a":"نظرية الحسابات","e":"Computation Theory","cr":3,"p":["MA112"],"t":["CS"]},
+ {"c":"AI413","a":"تعلّم الآلة","e":"Machine Learning","cr":3,"p":["MA113","MA222"],"t":["CS","IS","AI"]},
+ {"c":"CS453","a":"الرؤية بالحاسب","e":"Computer Vision","cr":3,"p":["CS351","CS352"],"t":["CS","IT"]},
+ {"c":"CS491","a":"الحوسبة السحابية","e":"Cloud Computing","cr":3,"p":["CS321"],"t":["CS"]},
+ {"c":"CS421","a":"نظم التشغيل ٢","e":"Operating Systems II","cr":3,"p":["CS321"],"t":["CS"]},
+ {"c":"CS442","a":"برمجة النظم المدمجة","e":"Embedded Systems Prog.","cr":3,"p":["CS322","CS241"],"t":["CS"]},
+ {"c":"CS431","a":"تحليل البيانات الضخمة","e":"Big Data Analysis","cr":3,"p":["IS211"],"t":["CS","AI"]},
+ {"c":"CS411","a":"نظم المعلومات الحيوية","e":"Bioinformatics Systems","cr":3,"p":["CS311"],"t":["CS"]},
+ {"c":"CS443","a":"برمجة المحمول","e":"Mobile Programming","cr":3,"p":["CS321"],"t":["CS"]},
+ {"c":"CS492","a":"اختبار البرمجيات وضمان الجودة","e":"Software Testing & QA","cr":3,"p":["CS391","CS311"],"t":["CS"]},
+ {"c":"CS471","a":"أمن البرمجيات","e":"Software Security","cr":3,"p":["CS311","CS391"],"t":["CS"]},
+ {"c":"CS451","a":"تفاعل الإنسان والآلة","e":"Human-Computer Interaction","cr":3,"p":["CS391","CS311"],"t":["CS"]},
+ {"c":"CS493","a":"تصميم وعمارة البرمجيات","e":"Software Design & Architecture","cr":3,"p":["CS311","CS391"],"t":["CS"]},
+ {"c":"AI401","a":"معالجة اللغات الطبيعية","e":"Natural Language Processing","cr":3,"p":["CS311"],"t":["CS","AI"]},
+ {"c":"AI421","a":"الويب الدلالي والأنطولوجي","e":"Semantic Web & Ontology","cr":3,"p":["IS212","AI301"],"t":["CS","AI"]},
+ {"c":"AI435","a":"الحوسبة الضبابية","e":"Fuzzy Computing","cr":3,"p":["MA121","MA113"],"t":["CS","AI"]},
+ {"c":"CS464","a":"اكتشاف المعرفة","e":"Knowledge Discovery","cr":3,"p":["IS211","AI301"],"t":["CS"]},
+ {"c":"CS473","a":"البرمجة الموزعة والمتزامنة","e":"Concurrent & Distributed Prog.","cr":3,"p":["CS331"],"t":["CS"]},
+ {"c":"CS413","a":"الحوسبة عالية الأداء","e":"High Performance Computing","cr":3,"p":["CS242"],"t":["CS"]},
+ {"c":"CS481","a":"مشروع التخرج","e":"Graduation Project","cr":6,"p":[],"g":108,"t":["CS"]},
+
+ {"c":"IT301","a":"المتحكمات الدقيقة","e":"Micro Controllers","cr":3,"p":["EE201"],"t":["IT","AI"]},
+ {"c":"IT331","a":"شبكات الحاسب ٢","e":"Computer Networks II","cr":3,"p":["IT231"],"t":["IT"]},
+ {"c":"IT332","a":"تراسل البيانات","e":"Data Communication","cr":3,"p":["MA113"],"t":["IT"]},
+ {"c":"IT341","a":"إشارات ونظم","e":"Signals & Systems","cr":3,"p":[],"t":["IT"]},
+ {"c":"IT342","a":"معالجة الإشارات الرقمية","e":"Digital Signal Processing","cr":3,"p":["IT341"],"t":["IT"]},
+ {"c":"CS362","a":"التعرف على الأنماط ١","e":"Pattern Recognition I","cr":3,"p":["IT341","MA222"],"t":["IT"]},
+ {"c":"IT411","a":"تأمين الشبكات والمعلومات","e":"Networks & Info Security","cr":3,"p":["IT331"],"t":["IT"]},
+ {"c":"IT431","a":"تكنولوجيا الاتصالات","e":"Communication Technology","cr":3,"p":["IT231"],"t":["IT"]},
+ {"c":"IT421","a":"برمجة وبروتوكولات الإنترنت","e":"Internet Prog. & Protocols","cr":3,"p":["IT331"],"t":["IT"]},
+ {"c":"IT441","a":"التنقيب في الوسائط المتعددة","e":"Multimedia Mining","cr":3,"p":["CS362"],"t":["IT"]},
+ {"c":"IT442","a":"الإنسان الآلي","e":"Robotics","cr":3,"p":["IT301"],"t":["IT","AI"]},
+ {"c":"IT443","a":"النظم المدمجة","e":"Embedded Systems","cr":3,"p":["IT301"],"t":["IT"]},
+ {"c":"IT432","a":"الشبكات اللاسلكية والمتحركة","e":"Wireless & Mobile Networks","cr":3,"p":["IT331"],"t":["IT"]},
+ {"c":"IT433","a":"شبكات الحوسبة السحابية","e":"Cloud Computing Networks","cr":3,"p":["IT331"],"t":["IT"]},
+ {"c":"IT434","a":"الشبكات الضوئية","e":"Optical Networks","cr":3,"p":["IT331"],"t":["IT"]},
+ {"c":"IT435","a":"شبكات الاستشعار اللاسلكية","e":"Wireless Sensor Networks","cr":3,"p":["IT432"],"t":["IT"]},
+ {"c":"IT412","a":"الأمن السيبراني","e":"Cyber Security","cr":3,"p":["IT411"],"t":["IT"]},
+ {"c":"CS456","a":"معالجة الفيديو الرقمي","e":"Digital Video Processing","cr":3,"p":["CS352"],"t":["IT"]},
+ {"c":"IT444","a":"الواقع الافتراضي","e":"Virtual Reality","cr":3,"p":["CS351","CS352"],"t":["IT"]},
+ {"c":"IT445","a":"معالجة الكلام","e":"Speech Processing","cr":3,"p":["IT342"],"t":["IT"]},
+ {"c":"CS466","a":"التعرف على الأنماط ٢","e":"Pattern Recognition II","cr":3,"p":["CS362"],"t":["IT"]},
+ {"c":"IT422","a":"تكنولوجيا اللغات الإنسانية","e":"Human Language Technology","cr":3,"p":["CS362"],"t":["IT"]},
+ {"c":"CS454","a":"الرسم بالحاسب ٢","e":"Computer Graphics II","cr":3,"p":["CS351"],"t":["IT"]},
+ {"c":"CS455","a":"الرسوم المتحركة","e":"Computer Animation","cr":3,"p":["CS351"],"t":["IT"]},
+ {"c":"IT471","a":"الحوسبة المتنقلة","e":"Mobile Computing","cr":3,"p":["IT432"],"t":["IT"]},
+ {"c":"IT472","a":"الحوسبة المتزامنة والمتوازية","e":"Concurrency & Parallel Computing","cr":3,"p":["CS322"],"t":["IT"]},
+ {"c":"IT473","a":"الحوسبة الكمية","e":"Quantum Computing","cr":3,"p":["CS322","CS211"],"t":["IT"]},
+ {"c":"IT461","a":"مشروع التخرج","e":"Graduation Project","cr":6,"p":[],"g":108,"t":["IT"]},
+
+ {"c":"IS311","a":"نظم إدارة قواعد البيانات","e":"Database Management Systems","cr":3,"p":["IS211","CS241"],"t":["IS"]},
+ {"c":"IS312","a":"مستودعات البيانات","e":"Data Warehousing","cr":3,"p":["IS211"],"t":["IS","AI"]},
+ {"c":"IS313","a":"إدارة ومعالجة الملفات","e":"File Management & Processing","cr":3,"p":["CS211"],"t":["IS"]},
+ {"c":"IS341","a":"استرجاع المعلومات","e":"Information Retrieval","cr":3,"p":["IS211","MA222"],"t":["IS","AI"]},
+ {"c":"IS331","a":"تحليل وتصميم نظم المعلومات","e":"Analysis & Design of IS","cr":3,"p":["IS211"],"t":["IS"]},
+ {"c":"IS314","a":"تطوير نظم المعلومات على الويب","e":"Web-based IS Development","cr":3,"p":["IS212"],"t":["IS"]},
+ {"c":"IS342","a":"إدارة إجراءات الأعمال","e":"Business Process Management","cr":3,"p":["IS331"],"t":["IS"]},
+ {"c":"IS301","a":"أساسيات نظم المعلومات","e":"IS Fundamentals","cr":3,"p":["IS211"],"t":["IS"]},
+ {"c":"IS431","a":"إدارة ونمذجة البيانات الكبيرة","e":"Managing & Modeling Big Data","cr":3,"p":["IS311"],"t":["IS"]},
+ {"c":"IS411","a":"التنقيب في البيانات","e":"Data Mining","cr":3,"p":["IS341"],"t":["IS"]},
+ {"c":"IS412","a":"هيكليات خدمية التوجه","e":"Service-Oriented Architecture","cr":3,"p":["IS314"],"t":["IS"]},
+ {"c":"IS413","a":"قواعد البيانات السحابية","e":"Cloud Databases","cr":3,"p":["IS311"],"t":["IS"]},
+ {"c":"IS414","a":"قواعد البيانات الموزعة","e":"Distributed Database","cr":3,"p":["IS311"],"t":["IS"]},
+ {"c":"IS441","a":"التنقيب في إجراءات الأعمال","e":"Business Process Mining","cr":3,"p":["IS342"],"t":["IS"]},
+ {"c":"IS415","a":"تطبيقات الحوسبة المحمولة","e":"Mobile Computing Applications","cr":3,"p":["IS314"],"t":["IS"]},
+ {"c":"IS421","a":"منهجيات تطوير نظم المعلومات","e":"IS Development Methodologies","cr":3,"p":["IS331"],"t":["IS"]},
+ {"c":"IS422","a":"تطبيقات نظم المعلومات","e":"IS Applications","cr":3,"p":["IS331"],"t":["IS"]},
+ {"c":"IS442","a":"ضمان جودة نظم المعلومات","e":"IS Quality Assurance","cr":3,"p":["IS331"],"t":["IS"]},
+ {"c":"IS443","a":"أمن وإدارة مخاطر نظم المعلومات","e":"IS Security & Risk Mgmt","cr":3,"p":["IS331"],"t":["IS"]},
+ {"c":"IS444","a":"مراجعة ورقابة نظم المعلومات","e":"IS Audit & Control","cr":3,"p":["IS331"],"t":["IS"]},
+ {"c":"IS445","a":"نظم معلومات المؤسسة","e":"Enterprise Information Systems","cr":3,"p":["IS314"],"t":["IS"]},
+ {"c":"IS446","a":"إدارة مشاريع نظم المعلومات","e":"IS Project Management","cr":3,"p":["IS331"],"t":["IS"]},
+ {"c":"IS447","a":"التجارة الإلكترونية","e":"E-Business","cr":3,"p":["IS331"],"t":["IS"]},
+ {"c":"IS451","a":"مشروع التخرج","e":"Graduation Project","cr":6,"p":[],"g":108,"t":["IS"]},
+
+ {"c":"MA301","a":"التفكير الاحتمالي","e":"Probabilistic Reasoning","cr":3,"p":["MA222"],"t":["AI"]},
+ {"c":"AI321","a":"الذكاء الحسابي","e":"Computational Intelligence","cr":3,"p":["MA113","MA222"],"t":["AI"]},
+ {"c":"MA302","a":"البرمجة الخطية والصحيحة","e":"Linear & Integer Programming","cr":3,"p":["MA113"],"t":["AI"]},
+ {"c":"AI311","a":"تحليل البيانات","e":"Data Analytics","cr":3,"p":["MA222"],"t":["AI"]},
+ {"c":"AI312","a":"علوم البيانات","e":"Data Science","cr":3,"p":["MA222"],"t":["AI"]},
+ {"c":"AI313","a":"الشبكات العصبية","e":"Neural Networks","cr":3,"p":["AI312"],"t":["AI"]},
+ {"c":"AI411","a":"التعلم العميق","e":"Deep Learning","cr":3,"p":["AI312","AI301"],"t":["AI"]},
+ {"c":"AI425","a":"الأنظمة الخبيرة","e":"Expert Systems","cr":3,"p":["AI301"],"t":["AI"]},
+ {"c":"AI426","a":"الحوسبة التطورية","e":"Evolutionary Computing","cr":3,"p":["CS311"],"t":["AI"]},
+ {"c":"AI422","a":"نظم صنع القرار","e":"Decision Making Systems","cr":3,"p":["MA302"],"t":["AI"]},
+ {"c":"AI424","a":"النمذجة القائمة على الوكلاء","e":"Agent-Based Modeling","cr":3,"p":["AI321"],"t":["AI"]},
+ {"c":"AI431","a":"إدارة مشروعات الذكاء الاصطناعي","e":"AI Project Management","cr":3,"p":["MA231"],"t":["AI"]},
+ {"c":"AI423","a":"اللغويات الحاسوبية","e":"Computational Linguistics","cr":3,"p":["CS311"],"t":["AI"]},
+ {"c":"AI412","a":"تصور البيانات","e":"Data Visualization","cr":3,"p":["MA112","MA222"],"t":["AI"]},
+ {"c":"AI432","a":"إنترنت الأشياء","e":"Internet of Things","cr":3,"p":["CS241"],"t":["AI"]},
+ {"c":"AI434","a":"مشروع التخرج","e":"Graduation Project","cr":6,"p":[],"g":108,"t":["AI"]}
+];
+
+const DEPT_COLOR = {CS:'#14293D',IS:'#2E7D5B',IT:'#3E6B8C',AI:'#A9782A',MA:'#6B7A8D',EE:'#6B7A8D',PH:'#6B7A8D',TR:'#9AA7B5'};
+const DEPT_RANK  = {MA:0,EE:1,PH:2,CS:3,IS:4,IT:5,AI:6,TR:7};
+const map = {}; RAW.forEach(d=>map[d.c]=d);
+const dept = c => c.match(/^[A-Z]+/)[0];
+const color= c => DEPT_COLOR[dept(c)] || '#7C8CA0';
+const XNS='http://www.w3.org/1999/xhtml';
+
+let TRACK='CS', SEL=null, POS={}, NODES=[], EDGES=[];
+let GW=0, GH=0, scale=1, userZoom=false;
+const W=190, H=60, ROWSTEP=74, COLSTEP=262, PADX=44, PADY=40;
+
+function shown(d,tr){ return d.core || (d.t||[]).includes(tr); }
+function preShown(c,set){ return (map[c].p||[]).filter(p=>set.has(p)); }
+
+function build(){
+  const svg=document.getElementById('svg');
+  NODES=RAW.filter(d=>shown(d,TRACK)).map(d=>d.c);
+  const set=new Set(NODES);
+
+  const memo={};
+  function depth(c){ if(c in memo)return memo[c]; memo[c]=0;
+    const ps=preShown(c,set); return memo[c]= ps.length? 1+Math.max(...ps.map(depth)) : 0; }
+  NODES.forEach(depth);
+  let maxBase=0; NODES.forEach(c=>{ if(!map[c].g) maxBase=Math.max(maxBase,memo[c]); });
+  NODES.forEach(c=>{ if(map[c].g===108) memo[c]=maxBase; else if(map[c].g===72) memo[c]=Math.min(2,maxBase); });
+  const maxDepth=Math.max(...NODES.map(c=>memo[c]));
+
+  const cols={}; for(let d=0;d<=maxDepth;d++) cols[d]=[];
+  NODES.forEach(c=>cols[memo[c]].push(c));
+  const yi={};
+  for(let d=0; d<=maxDepth; d++){
+    let arr=cols[d];
+    if(d===0){ arr.sort((a,b)=> (DEPT_RANK[dept(a)]-DEPT_RANK[dept(b)]) || a.localeCompare(b)); }
+    else{ arr.forEach(c=>{ const ps=preShown(c,set).filter(p=>p in yi);
+        c.__b = ps.length ? ps.reduce((s,p)=>s+yi[p],0)/ps.length : 1e6; });
+      arr.sort((a,b)=> (a.__b-b.__b) || (DEPT_RANK[dept(a)]-DEPT_RANK[dept(b)])); }
+    arr.forEach((c,i)=>{ yi[c]=i; });
+  }
+  const maxRows=Math.max(...Object.values(cols).map(a=>a.length));
+
+  POS={};
+  NODES.forEach(c=>{ const d=memo[c]; POS[c]={ x:(maxDepth-d)*COLSTEP+PADX, y:yi[c]*ROWSTEP+PADY, d }; });
+
+  EDGES=[]; NODES.forEach(c=> preShown(c,set).forEach(p=> EDGES.push([p,c]) ));
+
+  GW=(maxDepth+1)*COLSTEP + PADX*2 - (COLSTEP-W);
+  GH=maxRows*ROWSTEP + PADY*2;
+  svg.setAttribute('viewBox',`0 0 ${GW} ${GH}`);
+
+  let s=`<defs>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#9AA6B3"/></marker>
+    <marker id="arU" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#2C6FB0"/></marker>
+    <marker id="arD" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#2E7D5B"/></marker>
+  </defs>`;
+  EDGES.forEach(([p,c])=>{
+    const sp=POS[p], tp=POS[c];
+    const sx=sp.x, sy=sp.y+H/2, tx=tp.x+W, ty=tp.y+H/2, dx=(sx-tx)*0.45;
+    s+=`<path class="edge" data-p="${p}" data-c="${c}" d="M${sx},${sy} C${sx-dx},${sy} ${tx+dx},${ty} ${tx},${ty}" marker-end="url(#ar)"/>`;
+  });
+  NODES.forEach(c=>{
+    const pos=POS[c], col=color(c), o=map[c];
+    const meta=(o.g?`≥${o.g} · `:'')+o.cr+'h';
+    s+=`<g class="node" data-c="${c}" transform="translate(${pos.x},${pos.y})">
+        <foreignObject x="0" y="0" width="${W}" height="${H}">
+          <div xmlns="${XNS}" class="nbox" data-c="${c}" style="background:${col}">
+            <span class="meta">${meta}</span><span class="code">${c}</span><span class="nm">${o.a}</span>
+          </div></foreignObject></g>`;
+  });
+  svg.innerHTML=s;
+  svg.querySelectorAll('.nbox').forEach(el=> el.addEventListener('click',ev=>{ ev.stopPropagation(); select(el.dataset.c); }));
+
+  document.getElementById('stat').innerHTML=`<b>${NODES.length}</b> مقرر · <b>${EDGES.length}</b> علاقة`;
+  if(!userZoom) fit(); else applyZoom();
+  if(SEL && set.has(SEL)) select(SEL); else clearSel();
+}
+
+/* ---- zoom ---- */
+function applyZoom(){
+  const svg=document.getElementById('svg');
+  svg.setAttribute('width', Math.round(GW*scale));
+  svg.setAttribute('height', Math.round(GH*scale));
+}
+function fit(){
+  const box=document.getElementById('scroll').clientWidth-4;
+  scale=Math.max(.32, Math.min(1, box/GW));
+  applyZoom();
+}
+function zoomBy(f){ userZoom=true; scale=Math.max(.3,Math.min(1.6,scale*f)); applyZoom(); }
+
+/* ---- selection ---- */
+function ancestors(c){ const set=new Set(),st=[c];
+  while(st.length){ const x=st.pop(); (map[x].p||[]).forEach(p=>{ if(POS[p]&&!set.has(p)){set.add(p);st.push(p);} }); } return set; }
+function descendants(c){ const set=new Set(),st=[c],dep={};
+  NODES.forEach(n=> (map[n].p||[]).forEach(p=>{ (dep[p]=dep[p]||[]).push(n); }));
+  while(st.length){ const x=st.pop(); (dep[x]||[]).forEach(n=>{ if(!set.has(n)){set.add(n);st.push(n);} }); } return set; }
+function directDeps(c){ return NODES.filter(n=> (map[n].p||[]).includes(c)); }
+
+function select(c){
+  SEL=c; const anc=ancestors(c), desc=descendants(c);
+  document.querySelectorAll('.node').forEach(g=>{ const k=g.dataset.c; g.classList.remove('sel','anc','desc','dim');
+    if(k===c)g.classList.add('sel'); else if(anc.has(k))g.classList.add('anc'); else if(desc.has(k))g.classList.add('desc'); else g.classList.add('dim'); });
+  document.querySelectorAll('.edge').forEach(e=>{ const p=e.dataset.p,t=e.dataset.c;
+    const up=(t===c||anc.has(t))&&(p===c||anc.has(p)), dn=(p===c||desc.has(p))&&(t===c||desc.has(t));
+    e.classList.remove('dim');e.style.stroke='';e.style.strokeWidth='';e.setAttribute('marker-end','url(#ar)');
+    if(up){e.style.stroke='#2C6FB0';e.style.strokeWidth='2.4';e.setAttribute('marker-end','url(#arU)');}
+    else if(dn){e.style.stroke='#2E7D5B';e.style.strokeWidth='2.4';e.setAttribute('marker-end','url(#arD)');}
+    else e.classList.add('dim'); });
+  renderDetail(c,anc,desc);
+}
+function clearSel(){
+  SEL=null;
+  document.querySelectorAll('.node').forEach(g=>g.classList.remove('sel','anc','desc','dim'));
+  document.querySelectorAll('.edge').forEach(e=>{e.classList.remove('dim');e.style.stroke='';e.style.strokeWidth='';e.setAttribute('marker-end','url(#ar)');});
+  document.getElementById('detail').innerHTML=`<p class="hint"><b>دوسي على أي مقرر</b> لعرض تفاصيله وسلسلة متطلباته.</p>`;
+}
+function renderDetail(c,anc,desc){
+  const o=map[c], col=color(c);
+  const dp=(o.p||[]).filter(p=>POS[p]), dd=directDeps(c);
+  const pill=(k,cls)=>`<span class="pill ${cls}" data-c="${k}"><b style="color:${color(k)}">${k}</b>${map[k].a}</span>`;
+  document.getElementById('detail').innerHTML=`
+    <span class="dcode" style="background:${col}">${c}</span>
+    <p class="dname">${o.a}</p><p class="den">${o.e}</p>
+    <div class="chips"><span class="chip">${o.cr} ساعة معتمدة</span>${o.g?`<span class="chip">بوابة: ≥ ${o.g} ساعة</span>`:''}
+      <span class="chip">${anc.size} متطلب في السلسلة</span><span class="chip">${desc.size} مقرر يعتمد عليه</span></div>
+    <div class="req"><h4><span class="d" style="background:var(--anc)"></span>يتطلب مباشرةً</h4>
+      ${dp.length? dp.map(p=>pill(p,'up')).join('') : `<p class="none">لا يوجد — مقرر ${o.g?'ببوابة ساعات':'بدون متطلب سابق'}.</p>`}</div>
+    <div class="req"><h4><span class="d" style="background:var(--desc)"></span>يفتح مباشرةً</h4>
+      ${dd.length? dd.map(k=>pill(k,'dn')).join('') : `<p class="none">لا يفتح مقررات في هذا التخصص.</p>`}</div>
+    <button class="reset" id="rst">مسح التحديد</button>`;
+  document.querySelectorAll('#detail .pill').forEach(p=>p.addEventListener('click',()=>select(p.dataset.c)));
+  document.getElementById('rst').addEventListener('click',clearSel);
+}
+
+/* ---- nav + events ---- */
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  window.scrollTo(0,0);
+  if(id==='page-map'){ if(!NODES.length) build(); else if(!userZoom) fit(); }
+}
+document.getElementById('openMap').addEventListener('click',()=>showPage('page-map'));
+document.getElementById('openMap2').addEventListener('click',()=>showPage('page-map'));
+document.getElementById('openBylaw').addEventListener('click',()=>showPage('page-bylaw'));
+document.getElementById('toGuide').addEventListener('click',()=>showPage('page-guide'));
+document.getElementById('toGuide2').addEventListener('click',()=>showPage('page-guide'));
+document.getElementById('toMap2').addEventListener('click',()=>showPage('page-map'));
+document.getElementById('svg').addEventListener('click',clearSel);
+document.getElementById('tabs').addEventListener('click',e=>{ const b=e.target.closest('.tab'); if(!b)return;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); b.classList.add('active');
+  TRACK=b.dataset.t; SEL=null; build(); });
+document.getElementById('zin').addEventListener('click',()=>zoomBy(1.2));
+document.getElementById('zout').addEventListener('click',()=>zoomBy(1/1.2));
+document.getElementById('zfit').addEventListener('click',()=>{userZoom=false;fit();});
+let rt; window.addEventListener('resize',()=>{ clearTimeout(rt); rt=setTimeout(()=>{ if(!userZoom && document.getElementById('page-map').classList.contains('on')) fit(); },160); });
+
+build();
+</script>
+</body>
+</html>
