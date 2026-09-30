@@ -1,0 +1,19 @@
+{
+  "name": "fci-advisor-bot",
+  "version": "0.1.0",
+  "description": "Academic advisor assistant bot for FCI Qena University (المرشد الأكاديمي المساعد)",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "kb:build": "node tools/build-courses.mjs",
+    "kb:size": "node tools/check-kb-size.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "grammy": "^1.38.3"
+  }
+}
