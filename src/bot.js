@@ -108,7 +108,7 @@ async function maybeExtractFacts(chatId, deps) {
     .slice(-FACTS_RECENT_WINDOW)
     .map((entry) => (entry.r === "bot" ? `البوت: ${entry.t}` : `[${entry.n}]: ${entry.t}`))
     .join("\n");
-  const raw = await deps.llm.chat([{ role: "user", content: factsPrompt(facts, recent) }], 300);
+  const raw = await deps.llm.chat([{ role: "user", content: factsPrompt(facts, recent) }], 800);
   const fresh = parseFacts(raw, facts);
   if (fresh.length) deps.memory.addFacts(chatId, fresh);
 }

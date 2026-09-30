@@ -3,3 +3,5 @@ node_modules/
 data/
 *.log
 .zcode/
+docs/advising-chat-raw.txt
+docs/leaders-chat-raw.txt

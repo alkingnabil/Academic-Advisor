@@ -28,6 +28,7 @@ async function callCompletions(config, messages, maxTokens) {
       model: config.llmModel,
       messages,
       temperature: 0.4,
+      thinking: { type: "disabled" },
       max_tokens: maxTokens,
     }),
     signal: AbortSignal.timeout(TIMEOUT_MS),
@@ -38,7 +39,7 @@ async function callCompletions(config, messages, maxTokens) {
 }
 
 export function createLlmClient(config) {
-  async function chat(messages, maxTokens = 700) {
+  async function chat(messages, maxTokens = 1500) {
     try {
       return await callCompletions(config, messages, maxTokens);
     } catch (error) {
