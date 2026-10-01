@@ -54,7 +54,7 @@ await bot.handleUpdate(update(2, mention, {
 }));
 const mentionReply = sent.at(-1);
 check("mention: replied", sent.length === 1, JSON.stringify(sent));
-check("mention: tagged", mentionReply?.text.startsWith("@ahmed_t"), mentionReply?.text);
+check("mention: tagged", mentionReply?.text.includes("@ahmed_t"), mentionReply?.text);
 check("mention: reply_to", mentionReply?.replyTo === 2);
 check("mention: bot msg stored", memory.groupState(groupId).history.at(-1)?.r === "bot");
 

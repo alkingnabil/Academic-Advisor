@@ -7,6 +7,9 @@ const TELEGRAM_LIMIT = 4096;
 const REPLY_CHUNK = 3_800;
 
 const ARABIC_ERROR = "معلش، حصلت مشكلة تقنية في اللحظة دي. جرب تاني بعد شوية 🙏";
+// Telegram sets text direction from the first strong character — Latin tags/terms at the
+// start flip Arabic messages to LTR. The invisible RTL mark forces correct direction.
+const RTL_MARK = "\u200F";
 
 function displayName(from) {
   return from?.username ? `@${from.username}` : from?.first_name || "طالب";
@@ -60,7 +63,7 @@ function splitReply(text) {
 }
 
 async function sendReply(ctx, text, replyToId) {
-  const parts = splitReply(text);
+  const parts = splitReply(RTL_MARK + text);
   await ctx.api.sendMessage(ctx.chat.id, parts[0], { reply_to_message_id: replyToId });
   for (const part of parts.slice(1)) {
     await ctx.api.sendMessage(ctx.chat.id, part);
@@ -137,7 +140,7 @@ async function answerAddressed(ctx, deps, key, isGroup) {
     return sendReply(ctx, `${prefix}${reply}`, ctx.message.message_id);
   } catch (error) {
     console.error("reply failed:", error.message);
-    return ctx.reply(`${prefix}${ARABIC_ERROR}`, {
+    return ctx.reply(`${RTL_MARK}${prefix}${ARABIC_ERROR}`, {
       reply_to_message_id: ctx.message.message_id,
     });
   }
@@ -158,7 +161,7 @@ async function handleGroup(ctx, deps) {
   deps.memory.rememberGroupMessage(ctx.chat.id, name, msg.text ?? "[صورة/ملف]");
   if (!isAddressed(ctx, msg)) return;
   if (!msg.text) {
-    return ctx.reply(`${name} ابعت سؤالك كتابة وأنا هجاوبك`, {
+    return ctx.reply(`${RTL_MARK}${name} ابعت سؤالك كتابة وأنا هجاوبك`, {
       reply_to_message_id: msg.message_id,
     });
   }
