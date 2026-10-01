@@ -5,3 +5,9 @@ data/
 .zcode/
 docs/advising-chat-raw.txt
 docs/leaders-chat-raw.txt
+tools/set-provider.mjs
+tools/switch-atria.mjs
+tools/probe-atria.mjs
+tools/llm-smoke.mjs
+tools/pick-provider.mjs
+tools/dump-raw.mjs
