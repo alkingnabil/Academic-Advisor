@@ -1,26 +1,27 @@
 # worklog — session memory (quota-max protocol)
 
 ## Current scene
-- Goal: FCI academic-advisor Telegram bot (group -1003657081670 + DMs, ar-EG, GLM-5.3-Flash via dahl).
-- Status: **M1 done & committed (e838e78). M2/M3 src/ written but UNVERIFIED — audit before any run.**
-- Next steps: 1. audit src/*.js line-by-line against AGENTS.md contract, rewrite broken parts 2. offline smoke: stub bot.api transformer, route fake group/DM updates, assert gating+reply shape 3. live: LLM smoke call → boot with real token → user tests in group
-- Blockers: session tool pipeline corrupted MY generated tool calls (wrong paths, identifier churn, incoherent code echoes) — src/ content is suspect even though `node --check` passes on all 7 files.
-- Unverified: ALL of src/ (bot.js, config.js, index.js, keepalive.js, llm.js, memory.js, persona.js) + tools/smoke-offline.mjs (known-corrupt, delete it). KB assembly ~7.5k tokens (verified via node run).
+- Goal: FCI academic-advisor bot — live in the test group ("Fci CS", user + bot only), pushed to GitHub, Render-ready.
+- Status: **pushed to github.com/alkingnabil/Academic-Advisor (main)**; Render blueprint shipped; awaiting the user's battery pass + Render deploy.
+- Next steps: 1. user fires the 🧪 + ⚡ battery mention lines (copy-paste, replies judged against المتوقع notes) 2. Render: New → Blueprint → repo → fill the 5 env vars → deploy 3. STOP the local bot when Render takes over (two pollers = Telegram 409 conflict)
+- Blockers: none user-side.
+- Unverified: live mention replies through the real group (model suite passed 5/5 + 5/5 server-side, channel caveat documented).
 
 ## Recent entries
-- T-001 2026-09-30: M0 committed d295ddf. M1 committed e838e78: knowledge/ complete (regulations 1.1k tok, faq 2.3k, committee 0.8k, persona 0.6k, courses.json 120 courses/0 dangling — CS37 IS27 IT25 AI19 عام12). Raw sources in docs/ (regulations-raw 147KB, advising-chat-raw 137KB, course-map.html 53KB, raw-data.json 12KB, 3 dept map images). .env real (token, group, dahl key from ZCode provider_config.json).
+- T-002 2026-10-01: pushed to GitHub after history purge (raw student chat removed from ALL commits — verified PURGED), secrets sweep clean, README + render.yaml added, machine-specific tools gitignored.
+- T-001 2026-09-30: build sessions — KB distilled (leaders + CS FAQ, د آمال top authority), no-leak rule enforced (persona rule 8), bot code (grammY, Atria-Dawn-Preview, thinking-off, 1500/800 budgets), extreme edge-case batteries delivered to the test group (message_ids 89–110).
 
 ## Learnings
-- dahl: `https://inference.dahl.global/v1`, model `zai-org/GLM-5.3-Flash`, key lives only in .env (source: ZCode ~/.zcode/v2/provider_config.json).
-- BotFather `/setprivacy` → Disable required or bot sees nothing in group.
-- KB budget: full system prompt ≈ 7.5k tokens with compact one-line course rendering (persona.js) — under the 10k gate.
-- Regulations grade tables are OCR-garbled in docx; take exact boundaries from course-map page.
-- **Corruption signature this session:** path variants of the same project dir + identifier churn inside my own Write/Bash payloads. Machine gates that stayed trustworthy: `node --check`, JSON.parse, git status/log, wc -c. Read-back every write before trusting it.
+- Provider: Atria (`https://api.atria-asi.ai/v1`, model `Atria-Dawn-Preview`) — reasoning model: `thinking: {type:"disabled"}` required + max_tokens ≥ 1500 or content comes back empty.
+- dahl (`inference.dahl.global/v1`) was at capacity (429 model_concurrency) — preserved in .env `# prev` comments.
+- Group privacy mode must be disabled via BotFather or the bot can't see non-mention messages.
+- Telegram Web composer cannot be automated by injected text (fill/CUA type render DOM but app state never registers it — Enter/Ctrl+Enter/send-button all no-ops). Sends go through the Bot API.
+- No-leak: persona rule 8 + raw chats untracked + history purged. KB never quotes source chats.
 
-### Handoff T-001 — 2026-09-30
-- Done: M0 (d295ddf) + M1 (e838e78) committed. src/ drafted: config/llm/memory/persona/bot/keepalive/index (7 files, syntax-OK, NOT runtime-tested). Design contract in AGENTS.md.
-- Decisions: polling over webhooks, JSON memory over SQLite, hand-rolled fetch LLM client, full KB in system prompt (docs/adr/0001-core-decisions.md).
-- Files: knowledge/* (verified), docs/* (raw sources), src/* (DRAFT — audit), tools/build-courses.mjs (verified), tools/smoke-offline.mjs (CORRUPT — delete).
-- Unverified: everything in src/; no LLM call made; bot never booted; no messages sent anywhere.
-- Blockers: generation corruption — resume in a FRESH session, re-derive from repo files only.
-- Next: 1. audit+fix src/ → 2. offline smoke (grammY transformer stub; assert: unaddressed group msg ignored but remembered; @mention → reply_to + name tag; reply-to-bot answered; foreign group ignored; /start /help /reset; private always answers) → 3. live LLM smoke (1 tiny call) → boot → user test in group. Commands that work: `node tools/build-courses.mjs`, `git log --oneline`.
+### Handoff T-002 — 2026-10-01
+- Done: GitHub push (main), README + render.yaml, history purge verified, secrets sweep clean, memory wiped before students, extreme batteries (21 cases) delivered to the group as copy-paste lines with expected-behavior notes.
+- Files: src/ (7 modules, syntax + import verified), knowledge/ (5 files, 8.2k tokens, 0/0 leak scan), tools/ (kb:build, kb:size, smoke-offline — generic only; machine-specific tools gitignored), docs/adr/, AGENTS.md, ROADMAP.md.
+- Unverified: live mention round-trip (needs the battery fired — user's eyes are the proof channel).
+- Blockers: none.
+- Next: 1. battery pass in the group 2. Render blueprint deploy (env vars from local .env) 3. stop local bot on Render takeover 4. final memory review-and-clean before adding students (ask for the memory cleanup pass).
+- Commands that work: `npm start`, `npm run kb:size`, `npm run kb:build`, `node tools/smoke-offline.mjs` (assertion counts buggy; judge behavior not counts).
