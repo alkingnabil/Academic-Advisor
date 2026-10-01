@@ -17,5 +17,11 @@ services:
         sync: false
       - key: LLM_MODEL
         sync: false
+      - key: LLM_FALLBACK_URL
+        sync: false
+      - key: LLM_FALLBACK_API_KEY
+        sync: false
+      - key: LLM_FALLBACK_MODEL
+        sync: false
       - key: MONGO_URL
         sync: false

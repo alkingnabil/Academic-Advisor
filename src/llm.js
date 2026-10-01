@@ -14,18 +14,19 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function isTransient(error) {
   if (error instanceof LlmHttpError) return RETRYABLE_STATUSES.has(error.status);
-  return error.name === "TimeoutError" || error.name === "AbortError";
+  // TypeError covers network-level fetch failures (connect timeout, DNS) — worth one retry.
+  return error.name === "TimeoutError" || error.name === "AbortError" || error.name === "TypeError";
 }
 
-async function callCompletions(config, messages, maxTokens) {
-  const response = await fetch(`${config.llmBaseUrl}/chat/completions`, {
+async function callCompletions(endpoint, messages, maxTokens) {
+  const response = await fetch(`${endpoint.baseUrl}/chat/completions`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${config.llmApiKey}`,
+      Authorization: `Bearer ${endpoint.apiKey}`,
     },
     body: JSON.stringify({
-      model: config.llmModel,
+      model: endpoint.model,
       messages,
       temperature: 0.4,
       thinking: { type: "disabled" },
@@ -38,15 +39,31 @@ async function callCompletions(config, messages, maxTokens) {
   return data.choices?.[0]?.message?.content?.trim() ?? "";
 }
 
+async function chatOnEndpoint(endpoint, messages, maxTokens) {
+  try {
+    return await callCompletions(endpoint, messages, maxTokens);
+  } catch (error) {
+    if (!isTransient(error)) throw error;
+    await sleep(RETRY_DELAY_MS);
+    return callCompletions(endpoint, messages, maxTokens);
+  }
+}
+
 export function createLlmClient(config) {
+  const endpoints = [{ baseUrl: config.llmBaseUrl, apiKey: config.llmApiKey, model: config.llmModel }];
+  if (config.llmFallback) endpoints.push(config.llmFallback);
+
   async function chat(messages, maxTokens = 1500) {
-    try {
-      return await callCompletions(config, messages, maxTokens);
-    } catch (error) {
-      if (!isTransient(error)) throw error;
-      await sleep(RETRY_DELAY_MS);
-      return callCompletions(config, messages, maxTokens);
+    let lastError;
+    for (const endpoint of endpoints) {
+      try {
+        return await chatOnEndpoint(endpoint, messages, maxTokens);
+      } catch (error) {
+        lastError = error;
+        console.error(`LLM endpoint failed (${endpoint.model}):`, error.message.slice(0, 100));
+      }
     }
+    throw lastError;
   }
   return { chat };
 }
