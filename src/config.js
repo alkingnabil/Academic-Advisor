@@ -30,6 +30,7 @@ export function loadConfig() {
         }
       : null,
     mongoUrl: process.env.MONGO_URL || "",
+    externalUrl: process.env.RENDER_EXTERNAL_URL || "",
     port: Number(process.env.PORT ?? 3000),
   };
 }

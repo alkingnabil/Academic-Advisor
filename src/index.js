@@ -12,7 +12,7 @@ mkdirSync("data", { recursive: true });
 const memory = await createMemory("data/memory.json", config.mongoUrl);
 const llm = createLlmClient(config);
 const bot = createBot(config, { memory, llm, systemPromptFor: buildSystemPrompt });
-const keepalive = startKeepalive(config.port);
+const keepalive = startKeepalive(config.port, config.externalUrl);
 
 async function shutdown() {
   console.log("shutting down…");
