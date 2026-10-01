@@ -46,7 +46,7 @@ Loaded once at boot and assembled into the system prompt (~8k tokens):
 
 The repo ships `render.yaml` (blueprint). In Render: **New → Blueprint → connect this repo**, fill the five `sync: false` env vars, deploy. The bot uses long polling and binds `PORT` with a keep-alive server, so no webhook setup is needed.
 
-Notes for Render free tier: the disk is ephemeral (bot memory resets on redeploy/restart), and free web services can spin down without inbound traffic — add an external pinger (e.g. UptimeRobot on `/`) if you need 24/7 uptime.
+Notes for Render free tier: the disk is ephemeral (bot memory resets on redeploy/restart unless `MONGO_URL` is set), and the bot **self-pings its public URL every 10 minutes** (via the injected `RENDER_EXTERNAL_URL`) to keep the free container awake — no external pinger required.
 
 ## Privacy statement
 
