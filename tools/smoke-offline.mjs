@@ -70,7 +70,7 @@ await bot.handleUpdate(update(3, "وبعدين؟", {
 check("reply-to-bot: answered", sent.length === 2, JSON.stringify(sent));
 
 // 4) /start in group: intro without LLM text
-await bot.handleUpdate(update(4, "/start"));
+await bot.handleUpdate(update(4, "/start", { entities: [{ offset: 0, length: 6, type: "bot_command" }] }));
 check("/start group: intro", sent.length === 3 && !sent.at(-1).text.includes(FAKE_REPLY));
 
 // 5) foreign group: fully ignored
@@ -82,7 +82,7 @@ check("foreign group: ignored", sent.length === 3 && memory.groupState(-99988877
 
 // 6) private /reset then question
 const priv = { date: base.date, chat: { id: 777, type: "private" }, from };
-await bot.handleUpdate({ update_id: 6, message: { ...priv, message_id: 6, text: "/reset" } });
+await bot.handleUpdate({ update_id: 6, message: { ...priv, message_id: 6, text: "/reset", entities: [{ offset: 0, length: 6, type: "bot_command" }] } });
 check("/reset private: confirmed", sent.length === 4 && sent.at(-1).text.includes("تم مسح"));
 await bot.handleUpdate({ update_id: 7, message: { ...priv, message_id: 7, text: "المعدل بيتحسب إزاي؟" } });
 check("private: untagged reply", sent.length === 5 && !sent.at(-1).text.startsWith("@"));

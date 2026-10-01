@@ -59,8 +59,8 @@ function splitReply(text) {
   return chunks;
 }
 
-async function sendReply(ctx, reply, replyToId, name) {
-  const parts = splitReply(`${name} ${reply}`.trim());
+async function sendReply(ctx, text, replyToId) {
+  const parts = splitReply(text);
   await ctx.api.sendMessage(ctx.chat.id, parts[0], { reply_to_message_id: replyToId });
   for (const part of parts.slice(1)) {
     await ctx.api.sendMessage(ctx.chat.id, part);
@@ -125,6 +125,7 @@ async function generate(key, deps, { isGroup, facts }) {
 async function answerAddressed(ctx, deps, key, isGroup) {
   await ctx.replyWithChatAction("typing");
   const facts = isGroup ? deps.memory.groupState(key).facts : [];
+  const prefix = isGroup ? `${displayName(ctx.from)} ` : "";
   try {
     const reply = await generate(key, deps, { isGroup, facts });
     if (isGroup) {
@@ -133,10 +134,10 @@ async function answerAddressed(ctx, deps, key, isGroup) {
     } else {
       deps.memory.rememberUserBotMessage(key, reply);
     }
-    return sendReply(ctx, reply, ctx.message.message_id, displayName(ctx.from));
+    return sendReply(ctx, `${prefix}${reply}`, ctx.message.message_id);
   } catch (error) {
     console.error("reply failed:", error.message);
-    return ctx.reply(`${displayName(ctx.from)} ${ARABIC_ERROR}`, {
+    return ctx.reply(`${prefix}${ARABIC_ERROR}`, {
       reply_to_message_id: ctx.message.message_id,
     });
   }
