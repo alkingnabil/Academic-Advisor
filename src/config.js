@@ -22,6 +22,7 @@ export function loadConfig() {
     llmBaseUrl: mustEnv("LLM_BASE_URL").replace(/\/+$/, ""),
     llmApiKey: mustEnv("LLM_API_KEY"),
     llmModel: mustEnv("LLM_MODEL"),
+    mongoUrl: process.env.MONGO_URL || "",
     port: Number(process.env.PORT ?? 3000),
   };
 }

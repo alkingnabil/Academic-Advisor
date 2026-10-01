@@ -9,7 +9,7 @@ import { createBot } from "./bot.js";
 const config = loadConfig();
 mkdirSync("data", { recursive: true });
 
-const memory = createMemory("data/memory.json");
+const memory = await createMemory("data/memory.json", config.mongoUrl);
 const llm = createLlmClient(config);
 const bot = createBot(config, { memory, llm, systemPromptFor: buildSystemPrompt });
 const keepalive = startKeepalive(config.port);
@@ -17,7 +17,8 @@ const keepalive = startKeepalive(config.port);
 async function shutdown() {
   console.log("shutting down…");
   await bot.stop();
-  memory.flush();
+  await memory.flush();
+  await memory.close();
   keepalive.close();
 }
 process.once("SIGINT", shutdown);

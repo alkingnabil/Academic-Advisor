@@ -6,7 +6,7 @@ import { createBot } from "../src/bot.js";
 
 const config = loadConfig();
 mkdirSync("data", { recursive: true });
-const memory = createMemory("data/smoke-memory.json");
+const memory = await createMemory("data/smoke-memory.json");
 const FAKE_REPLY = "رد تجريبي: التسجيل يبدأ السبت بإذن الله.";
 const llm = { chat: async () => FAKE_REPLY };
 const bot = createBot(config, { memory, llm, systemPromptFor: buildSystemPrompt });

@@ -1,4 +1,5 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { MongoClient } from "mongodb";
 
 const GROUP_HISTORY_LIMIT = 40;
 const USER_HISTORY_LIMIT = 24;
@@ -10,23 +11,50 @@ function trimTail(list, limit) {
   return list.length > limit ? list.slice(-limit) : list;
 }
 
-export function createMemory(filePath) {
-  const store = existsSync(filePath)
-    ? JSON.parse(readFileSync(filePath, "utf8"))
-    : { groups: {}, users: {} };
+function emptyStore() {
+  return { groups: {}, users: {} };
+}
+
+function loadFromFile(filePath) {
+  if (!existsSync(filePath)) return emptyStore();
+  return JSON.parse(readFileSync(filePath, "utf8"));
+}
+
+export async function createMemory(filePath, mongoUrl) {
+  const mongoClient = mongoUrl
+    ? new MongoClient(mongoUrl, { serverSelectionTimeoutMS: 10_000 })
+    : null;
+  if (mongoClient) await mongoClient.connect();
+  const loaded = mongoClient ? await loadFromMongo(mongoClient) : loadFromFile(filePath);
+  const store = { groups: loaded.groups ?? {}, users: loaded.users ?? {} };
   let flushTimer = null;
 
-  function flush() {
+  async function flush() {
     if (flushTimer) {
       clearTimeout(flushTimer);
       flushTimer = null;
     }
-    writeFileSync(filePath, JSON.stringify(store, null, 1));
+    if (mongoClient) await flushToMongo();
+    else writeFileSync(filePath, JSON.stringify(store, null, 1));
   }
 
   function scheduleFlush() {
     if (flushTimer) return;
-    flushTimer = setTimeout(flush, FLUSH_DELAY_MS);
+    flushTimer = setTimeout(() => {
+      flushTimer = null;
+      flush().catch((error) => console.error("memory flush failed:", error.message));
+    }, FLUSH_DELAY_MS);
+  }
+
+  async function flushToMongo() {
+    const collection = mongoClient.db().collection("memory");
+    await collection.replaceOne({ _id: "store" }, { ...store, _id: "store" }, { upsert: true });
+  }
+
+  async function loadFromMongo(client) {
+    const doc = await client.db().collection("memory").findOne({ _id: "store" });
+    if (!doc) return emptyStore();
+    return { groups: doc.groups ?? {}, users: doc.users ?? {} };
   }
 
   function group(chatId) {
@@ -89,5 +117,6 @@ export function createMemory(filePath) {
       scheduleFlush();
     },
     flush,
+    close: () => (mongoClient ? mongoClient.close() : undefined),
   };
 }
